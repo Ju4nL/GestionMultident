@@ -9,6 +9,9 @@ import Vista.VistaGestionCitas;
 import Vista.VistaAñadirCita;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -28,6 +31,17 @@ public class ControladorCitas implements ActionListener{
         vista_gestion.setTitle("Gestión de citas");
         vista_gestion.setLocationRelativeTo(null);
     }
+    public void cargarCitasDesdeArchivo(DefaultTableModel modeloTabla) {
+    try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\USER\\Documents\\GitHub\\GestionMultident\\AppMultident\\src\\Contenedores\\CitasTablas.txt"))) {
+        String linea;
+        while ((linea = reader.readLine()) != null) {
+            String[] datosCita = linea.split(",");
+            modeloTabla.addRow(datosCita);
+        }
+    } catch (IOException ex) {
+        JOptionPane.showMessageDialog(null, "Error al cargar las citas desde el archivo.");
+    }
+}
     
     public ControladorCitas (VistaGestionCitas c1){
         vista_gestion=c1;
@@ -35,8 +49,9 @@ public class ControladorCitas implements ActionListener{
         vista_gestion.btnOpcionAñadir.addActionListener(this);
         vista_gestion.btnOpcionEliminar.addActionListener(this);
         vista_gestion.btnOpcionAtras.addActionListener(this);
-        
+        cargarCitasDesdeArchivo(vista_gestion.getModeloTabla());
     }
+    
 
     
     @Override
