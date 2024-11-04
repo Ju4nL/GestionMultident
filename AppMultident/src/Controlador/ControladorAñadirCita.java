@@ -12,6 +12,9 @@ import Vista.VistaGestionCitas;
 import appmultident.AppMultident;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -74,6 +77,18 @@ public class ControladorAñadirCita implements ActionListener{
             vista_gestion.getModeloTabla().addRow(arreglo_gestionCitas.arregloCita);
             JOptionPane.showMessageDialog(vista_gestion, "Fila Agregada");
             vista_añadir.setVisible(false);
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("citas.txt", true))) {
+        // Convertimos el arreglo en una cadena de texto separada por comas
+        StringBuilder sb = new StringBuilder();
+        for (String dato : arreglo_gestionCitas.arregloCita) {
+            sb.append(dato).append(",");
+        }
+        // Quitamos la última coma y añadimos una nueva línea
+        sb.deleteCharAt(sb.length() - 1).append("\n");
+        writer.write(sb.toString());
+    } catch (IOException ex) {
+        JOptionPane.showMessageDialog(null, "Error al guardar la cita en el archivo.");
+    }
             
         }else if (e.getSource()==vista_añadir.jButton1){
             vista_añadir.setVisible(false);
