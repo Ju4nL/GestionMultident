@@ -15,6 +15,10 @@ public class Paciente {
     String telefonoPaciente;
     String emailPaciente;
     String direccionPaciente;
+    
+    public String StringIdPaciente(){
+        return Integer.toString(idPaciente);
+    }
 
     public int getIdPaciente() {
         return idPaciente;

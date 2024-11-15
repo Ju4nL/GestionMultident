@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import static java.lang.Math.random;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -64,8 +65,9 @@ public class ControladorAñadirCita implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        cita.setIdcita(vista_añadir.textoID.getText());
-        cita.setDni_cliente(vista_añadir.textoDni.getText());
+        int idrandom = (int) (Math.random()*1000)+1;
+        cita.setIdCita(idrandom);
+        cita.getPaciente().setIdPaciente(Integer.parseInt(vista_añadir.textoDni1.getText()));
         cita.setNombre_cliente(vista_añadir.textoNombre.getText());
         cita.setApellido_cliente(vista_añadir.textoApellido.getText());
         cita.setTelefono_cliente(vista_añadir.textoTelefono.getText());
