@@ -8,14 +8,26 @@ package Modelo;
  *
  * @author LOZADA
  */
-public class Odontologo {
-    int idOdontologo;
-    String nombre;
-    String especialidad;
-    String telefono;
-    String email;
-    String numeroColegiatura;
 
+public class Odontologo {
+    private int idOdontologo;
+    private String nombre;
+    private String especialidad;
+    private String telefono;
+    private String email;
+    private String numeroColegiatura;
+
+    // Constructor
+    public Odontologo(int idOdontologo, String nombre, String especialidad, String telefono, String email, String numeroColegiatura) {
+        this.idOdontologo = idOdontologo;
+        this.nombre = nombre;
+        this.especialidad = especialidad;
+        this.telefono = telefono;
+        this.email = email;
+        this.numeroColegiatura = numeroColegiatura;
+    }
+
+    // Getters y Setters
     public int getIdOdontologo() {
         return idOdontologo;
     }
@@ -62,5 +74,17 @@ public class Odontologo {
 
     public void setNumeroColegiatura(String numeroColegiatura) {
         this.numeroColegiatura = numeroColegiatura;
+    }
+
+    @Override
+    public String toString() {
+        return "Odontologo{" +
+                "idOdontologo=" + idOdontologo +
+                ", nombre='" + nombre + '\'' +
+                ", especialidad='" + especialidad + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", email='" + email + '\'' +
+                ", numeroColegiatura='" + numeroColegiatura + '\'' +
+                '}';
     }
 }

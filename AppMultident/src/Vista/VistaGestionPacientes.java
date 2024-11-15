@@ -15,21 +15,13 @@ public class VistaGestionPacientes extends javax.swing.JFrame {
 
     DefaultTableModel mt = new DefaultTableModel();
 
-    public DefaultTableModel getModeloTabla() {
-        return mt;
-    }
     
-    
-    public JTable getTablaCitas() {
-        return tablaGestionCitas;
-    }
-
     /**
      * Creates new form VistaGestionCitas
      */
     public VistaGestionPacientes() {
         
-        String[] columnas_listado = {"ID Cita", "DNI", "Nombre", "Apellido", "Teléfono", "Fecha", "Hora"};
+        String[] columnas_listado = {"ID Paciente", "Apellido", "Telefono", "Email", "Direccion"};
         initComponents();
         mt.setColumnIdentifiers(columnas_listado);
         tablaGestionCitas.setModel(mt);
@@ -47,8 +39,9 @@ public class VistaGestionPacientes extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         panelOpciones = new javax.swing.JPanel();
         btnOpcionAñadir = new javax.swing.JButton();
-        btnOpcionEliminar = new javax.swing.JButton();
+        btnOpcionActualizar = new javax.swing.JButton();
         btnOpcionAtras = new javax.swing.JButton();
+        btnOpcionEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaGestionCitas = new javax.swing.JTable();
 
@@ -68,13 +61,13 @@ public class VistaGestionPacientes extends javax.swing.JFrame {
             }
         });
 
-        btnOpcionEliminar.setBackground(new java.awt.Color(204, 204, 204));
-        btnOpcionEliminar.setForeground(new java.awt.Color(0, 0, 0));
-        btnOpcionEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/usuario (1).png"))); // NOI18N
-        btnOpcionEliminar.setText("Eliminar Paciente");
-        btnOpcionEliminar.addActionListener(new java.awt.event.ActionListener() {
+        btnOpcionActualizar.setBackground(new java.awt.Color(204, 204, 204));
+        btnOpcionActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        btnOpcionActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/usuario (1).png"))); // NOI18N
+        btnOpcionActualizar.setText("Actualizar Paciente");
+        btnOpcionActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOpcionEliminarActionPerformed(evt);
+                btnOpcionActualizarActionPerformed(evt);
             }
         });
 
@@ -85,6 +78,16 @@ public class VistaGestionPacientes extends javax.swing.JFrame {
         btnOpcionAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOpcionAtrasActionPerformed(evt);
+            }
+        });
+
+        btnOpcionEliminar.setBackground(new java.awt.Color(204, 204, 204));
+        btnOpcionEliminar.setForeground(new java.awt.Color(0, 0, 0));
+        btnOpcionEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/usuario (1).png"))); // NOI18N
+        btnOpcionEliminar.setText("Eliminar Paciente");
+        btnOpcionEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOpcionEliminarActionPerformed(evt);
             }
         });
 
@@ -100,7 +103,8 @@ public class VistaGestionPacientes extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnOpcionAñadir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnOpcionEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                    .addComponent(btnOpcionActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnOpcionEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelOpcionesLayout.setVerticalGroup(
@@ -108,25 +112,27 @@ public class VistaGestionPacientes extends javax.swing.JFrame {
             .addGroup(panelOpcionesLayout.createSequentialGroup()
                 .addGap(117, 117, 117)
                 .addComponent(btnOpcionAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnOpcionActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnOpcionEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnOpcionAtras)
                 .addGap(27, 27, 27))
         );
 
         tablaGestionCitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "DNI", "Nombre", "Apellido", "Telefono", "Fecha", "Hora"
+                "ID Paciente", "Nombre", "Apellido", "Telefono", "Email"
             }
         ));
         jScrollPane1.setViewportView(tablaGestionCitas);
@@ -147,7 +153,7 @@ public class VistaGestionPacientes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,51 +174,22 @@ public class VistaGestionPacientes extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnOpcionAñadirActionPerformed
 
-    private void btnOpcionEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionEliminarActionPerformed
+    private void btnOpcionActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionActualizarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnOpcionEliminarActionPerformed
+    }//GEN-LAST:event_btnOpcionActualizarActionPerformed
 
     private void btnOpcionAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionAtrasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnOpcionAtrasActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaGestionPacientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaGestionPacientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaGestionPacientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaGestionPacientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void btnOpcionEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnOpcionEliminarActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VistaGestionPacientes().setVisible(true);
-            }
-        });
-    }
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnOpcionActualizar;
     public javax.swing.JButton btnOpcionAtras;
     public javax.swing.JButton btnOpcionAñadir;
     public javax.swing.JButton btnOpcionEliminar;
