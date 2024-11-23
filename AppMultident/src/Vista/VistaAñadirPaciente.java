@@ -5,6 +5,7 @@
 package Vista;
 
 import Modelo.Cita;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -200,17 +201,23 @@ public class VistaAñadirPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void textoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textoNombreActionPerformed
+    public void displayErrorMessage(String message) {
+        JOptionPane.showMessageDialog(this, message, "Error Login", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void displaySucessMessage(String message) {
+        JOptionPane.showMessageDialog(this, message);
+    }
 
     /**
      * @param args the command line arguments
      */
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jButton1;

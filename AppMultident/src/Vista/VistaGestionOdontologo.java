@@ -5,6 +5,7 @@
 package Vista;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -17,12 +18,11 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
 
     DefaultTableModel mt = new DefaultTableModel();
 
-    
     /**
      * Creates new form VistaGestionCitas
      */
     public VistaGestionOdontologo() {
-        
+
         String[] columnas_listado = {"ID Paciente", "Apellido", "Telefono", "Email", "Direccion"};
         initComponents();
         mt.setColumnIdentifiers(columnas_listado);
@@ -56,7 +56,7 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
     public JTextField getTxtBuscar() {
         return txtBuscar;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -237,7 +237,14 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnOpcionEliminarActionPerformed
 
- 
+    public void displayErrorMessage(String message) {
+        JOptionPane.showMessageDialog(this, message, "Error Login", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void displaySucessMessage(String message) {
+        JOptionPane.showMessageDialog(this, message);
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

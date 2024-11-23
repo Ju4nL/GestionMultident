@@ -5,16 +5,23 @@
 package ListasEnlazadas.ListasEnlazadasOdontologo;
 
 import Modelo.Odontologo;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author LOZADA
  */
 public class ListaEnlazadaOdontologos {
+
     private NodoOdontologo cabeza;
 
     public ListaEnlazadaOdontologos() {
         this.cabeza = null;
+    }
+
+    public NodoOdontologo getCabeza() {
+        return cabeza;
     }
 
     // Método para agregar un odontólogo
@@ -54,7 +61,9 @@ public class ListaEnlazadaOdontologos {
 
     // Método para eliminar un odontólogo por ID
     public void eliminarPorId(int id) {
-        if (cabeza == null) return;
+        if (cabeza == null) {
+            return;
+        }
 
         if (cabeza.getDato().getIdOdontologo() == id) {
             cabeza = cabeza.getSiguiente();
@@ -70,5 +79,43 @@ public class ListaEnlazadaOdontologos {
             temp = temp.getSiguiente();
         }
     }
-}
 
+    public int contar() {
+        int contador = 0;
+        NodoOdontologo temp = cabeza;
+        while (temp != null) {
+            contador++;
+            temp = temp.getSiguiente();
+        }
+        return contador;
+    }
+
+    public boolean estaVacia() {
+        return cabeza == null;
+    }
+
+    public List<Odontologo> obtenerTodos() {
+        List<Odontologo> lista = new ArrayList<>();
+        NodoOdontologo temp = cabeza;
+        while (temp != null) {
+            lista.add(temp.getDato());
+            temp = temp.getSiguiente();
+        }
+        return lista;
+    }
+
+    public int obtenerMaximoId() {
+        int maxId = 1; // Asumimos que el ID mínimo es 0
+        NodoOdontologo temp = cabeza;
+
+        while (temp != null) {
+            if (temp.getDato().getIdOdontologo() > maxId) {
+                maxId = temp.getDato().getIdOdontologo(); // Actualizar el máximo
+            }
+            temp = temp.getSiguiente(); // Avanzar al siguiente nodo
+        }
+
+        return maxId; // Retornar el mayor ID encontrado
+    }
+
+}
