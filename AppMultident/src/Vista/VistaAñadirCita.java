@@ -35,15 +35,15 @@ public class VistaAñadirCita extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        textoDni = new javax.swing.JTextField();
-        textoNombre = new javax.swing.JTextField();
-        textoApellido = new javax.swing.JTextField();
-        textoTelefono = new javax.swing.JTextField();
+        textoIdOdontologo = new javax.swing.JTextField();
+        textoEstado = new javax.swing.JTextField();
+        textoFecha = new javax.swing.JTextField();
+        textoHora = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         textoID = new javax.swing.JLabel();
-        textoDni1 = new javax.swing.JTextField();
+        textoIdPaciente = new javax.swing.JTextField();
 
         jTextField3.setText("jTextField1");
 
@@ -69,22 +69,22 @@ public class VistaAñadirCita extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Hora");
 
-        textoDni.setBackground(new java.awt.Color(153, 153, 153));
-        textoDni.setForeground(new java.awt.Color(51, 51, 51));
+        textoIdOdontologo.setBackground(new java.awt.Color(153, 153, 153));
+        textoIdOdontologo.setForeground(new java.awt.Color(51, 51, 51));
 
-        textoNombre.setBackground(new java.awt.Color(153, 153, 153));
-        textoNombre.setForeground(new java.awt.Color(51, 51, 51));
-        textoNombre.addActionListener(new java.awt.event.ActionListener() {
+        textoEstado.setBackground(new java.awt.Color(153, 153, 153));
+        textoEstado.setForeground(new java.awt.Color(51, 51, 51));
+        textoEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoNombreActionPerformed(evt);
+                textoEstadoActionPerformed(evt);
             }
         });
 
-        textoApellido.setBackground(new java.awt.Color(153, 153, 153));
-        textoApellido.setForeground(new java.awt.Color(51, 51, 51));
+        textoFecha.setBackground(new java.awt.Color(153, 153, 153));
+        textoFecha.setForeground(new java.awt.Color(51, 51, 51));
 
-        textoTelefono.setBackground(new java.awt.Color(153, 153, 153));
-        textoTelefono.setForeground(new java.awt.Color(51, 51, 51));
+        textoHora.setBackground(new java.awt.Color(153, 153, 153));
+        textoHora.setForeground(new java.awt.Color(51, 51, 51));
 
         jButton1.setBackground(new java.awt.Color(0, 204, 204));
         jButton1.setForeground(new java.awt.Color(51, 51, 51));
@@ -113,11 +113,11 @@ public class VistaAñadirCita extends javax.swing.JFrame {
         textoID.setForeground(new java.awt.Color(51, 51, 51));
         textoID.setText("ID Paciente");
 
-        textoDni1.setBackground(new java.awt.Color(153, 153, 153));
-        textoDni1.setForeground(new java.awt.Color(51, 51, 51));
-        textoDni1.addActionListener(new java.awt.event.ActionListener() {
+        textoIdPaciente.setBackground(new java.awt.Color(153, 153, 153));
+        textoIdPaciente.setForeground(new java.awt.Color(51, 51, 51));
+        textoIdPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoDni1ActionPerformed(evt);
+                textoIdPacienteActionPerformed(evt);
             }
         });
 
@@ -146,14 +146,14 @@ public class VistaAñadirCita extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(textoDni1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textoIdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textoDni, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textoApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textoTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(textoIdOdontologo, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textoHora, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(73, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -163,24 +163,24 @@ public class VistaAñadirCita extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textoDni1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textoIdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textoID))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(textoDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textoIdOdontologo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(textoApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(textoTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textoHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -210,13 +210,13 @@ public class VistaAñadirCita extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void textoDni1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoDni1ActionPerformed
+    private void textoIdPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoIdPacienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textoDni1ActionPerformed
+    }//GEN-LAST:event_textoIdPacienteActionPerformed
 
-    private void textoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoNombreActionPerformed
+    private void textoEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoEstadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textoNombreActionPerformed
+    }//GEN-LAST:event_textoEstadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,11 +264,11 @@ public class VistaAñadirCita extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField6;
-    public javax.swing.JTextField textoApellido;
-    private javax.swing.JTextField textoDni;
-    public javax.swing.JTextField textoDni1;
+    public javax.swing.JTextField textoEstado;
+    public javax.swing.JTextField textoFecha;
+    public javax.swing.JTextField textoHora;
     public javax.swing.JLabel textoID;
-    public javax.swing.JTextField textoNombre;
-    public javax.swing.JTextField textoTelefono;
+    public javax.swing.JTextField textoIdOdontologo;
+    public javax.swing.JTextField textoIdPaciente;
     // End of variables declaration//GEN-END:variables
 }

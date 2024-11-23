@@ -28,7 +28,7 @@ public class VistaGestionCitas extends javax.swing.JFrame {
      */
     public VistaGestionCitas() {
         
-        String[] columnas_listado = {"ID Cita", "DNI", "Nombre", "Apellido", "Teléfono", "Fecha", "Hora"};
+        String[] columnas_listado = {"ID cita","ID Paciente", "ID Odontologo", "Estado", "Fecha", "Hora"};
         initComponents();
         mt.setColumnIdentifiers(columnas_listado);
         tablaGestionCitas.setModel(mt);
@@ -113,18 +113,26 @@ public class VistaGestionCitas extends javax.swing.JFrame {
 
         tablaGestionCitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "DNI", "Nombre", "Apellido", "Telefono", "Fecha", "Hora"
+                "ID Paciente", "ID Odontologo", "Estado", "Fecha", "Hora"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tablaGestionCitas);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

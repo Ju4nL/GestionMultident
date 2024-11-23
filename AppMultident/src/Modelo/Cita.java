@@ -17,6 +17,7 @@ public class Cita {
     private int idCita;
     private LocalDate fecha;
     private LocalTime hora;
+    private String estado;
     private Odontologo odontologo; 
     private Paciente paciente;
     
@@ -62,7 +63,13 @@ public class Cita {
         this.paciente = paciente;
     }
     
-    
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
     
     
