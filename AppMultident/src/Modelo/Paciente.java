@@ -9,6 +9,7 @@ package Modelo;
  * @author USER
  */
 public class Paciente {
+//<<<<<<< HEAD
     int idPaciente;
     String nombrePaciente;
     String apellidoPaciente;
@@ -19,7 +20,26 @@ public class Paciente {
     public String StringIdPaciente(){
         return Integer.toString(idPaciente);
     }
+//=======
+    private int idPaciente;
+    private String nombre;
+    private String apellido;
+    private String telefono;
+    private String email;
+    private String direccion;
+//>>>>>>> 452b672a70c28f9e6fd5e6872b5ccf0463c16678
 
+    // Constructor
+    public Paciente(int idPaciente, String nombre, String apellido, String telefono, String email, String direccion) {
+        this.idPaciente = idPaciente;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.telefono = telefono;
+        this.email = email;
+        this.direccion = direccion;
+    }
+
+    // Getters y Setters
     public int getIdPaciente() {
         return idPaciente;
     }
@@ -28,45 +48,55 @@ public class Paciente {
         this.idPaciente = idPaciente;
     }
 
-    public String getNombrePaciente() {
-        return nombrePaciente;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombrePaciente(String nombrePaciente) {
-        this.nombrePaciente = nombrePaciente;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getApellidoPaciente() {
-        return apellidoPaciente;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setApellidoPaciente(String apellidoPaciente) {
-        this.apellidoPaciente = apellidoPaciente;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public String getTelefonoPaciente() {
-        return telefonoPaciente;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setTelefonoPaciente(String telefonoPaciente) {
-        this.telefonoPaciente = telefonoPaciente;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
-    public String getEmailPaciente() {
-        return emailPaciente;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailPaciente(String emailPaciente) {
-        this.emailPaciente = emailPaciente;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getDireccionPaciente() {
-        return direccionPaciente;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setDireccionPaciente(String direccionPaciente) {
-        this.direccionPaciente = direccionPaciente;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Paciente{" +
+                "idPaciente=" + idPaciente +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", email='" + email + '\'' +
+                ", direccion='" + direccion + '\'' +
+                '}';
+    }
 }
