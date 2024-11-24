@@ -20,12 +20,12 @@ public class AppMultident {
      */
     public static void main(String[] args) {
         //FlatMacLightLaf.setup();
-        UIManager.put("Button.arc", 25); 
-        VistaGestionCitas v1 = new VistaGestionCitas();
-        ControladorCitas c1 = new ControladorCitas(v1);
+        //UIManager.put("Button.arc", 25); 
+        VistaGestionCitas vg1 = new VistaGestionCitas();
+        ControladorCitas c1 = new ControladorCitas(vg1);
         
         c1.iniciar();
-        v1.setVisible(true);
+        vg1.setVisible(true);
     }
     
 }

@@ -13,10 +13,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VistaGestionCitas extends javax.swing.JFrame {
 
-    DefaultTableModel mt = new DefaultTableModel();
+    DefaultTableModel modeloTabla = new DefaultTableModel();
+    
 
     public DefaultTableModel getModeloTabla() {
-        return mt;
+        return modeloTabla;
     }
 
     public JTable getTablaCitas() {
@@ -27,11 +28,17 @@ public class VistaGestionCitas extends javax.swing.JFrame {
      * Creates new form VistaGestionCitas
      */
     public VistaGestionCitas() {
+        modeloTabla = new DefaultTableModel();
+        JTable tablaCitas = new JTable(modeloTabla);
         
-        String[] columnas_listado = {"ID cita","ID Paciente", "ID Odontologo", "Estado", "Fecha", "Hora"};
+        modeloTabla.addColumn("ID");
+        modeloTabla.addColumn("Paciente");
+        modeloTabla.addColumn("Odontólogo");
+        modeloTabla.addColumn("Estado");
+        modeloTabla.addColumn("Fecha");
+        modeloTabla.addColumn("Hora");
         initComponents();
-        mt.setColumnIdentifiers(columnas_listado);
-        tablaGestionCitas.setModel(mt);
+        tablaGestionCitas.setModel(this.modeloTabla);
     }
 
     /**

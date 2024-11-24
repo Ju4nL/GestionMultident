@@ -12,6 +12,8 @@ import Vista.VistaGestionCitas;
 import appmultident.AppMultident;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,8 +22,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -43,6 +47,13 @@ public class ControladorAñadirCita implements ActionListener {
 
         vista_añadir.jButton1.addActionListener(this);
         vista_añadir.jButton2.addActionListener(this);
+        vista_añadir.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Solo cierra esta ventana en lugar de cerrar toda la aplicación
+                vista_añadir.dispose();
+            }
+        });
     }
 
     public void iniciar() {
@@ -67,21 +78,22 @@ public class ControladorAñadirCita implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int idrandom = (int) (Math.random()*1000)+1;
+        int idrandom = (int) (Math.random() * 1000) + 1;
         cita.setIdCita(idrandom);
         cita.getPaciente().setIdPaciente(Integer.parseInt(vista_añadir.textoIdPaciente.getText()));
         cita.getOdontologo().setIdOdontologo(Integer.parseInt(vista_añadir.textoIdOdontologo.getText()));
         cita.setEstado(vista_añadir.textoFecha.getText());
         cita.setFecha(LocalDate.parse(vista_añadir.textoFecha.getText()));
         cita.setHora(LocalTime.parse(vista_añadir.textoHora.getText()));
-       
-       
 
         if (e.getSource() == vista_añadir.jButton2) {
             ArregloCita arreglo_gestionCitas = new ArregloCita(cita);
 
+            System.out.println("Agregando fila: " + Arrays.toString(arreglo_gestionCitas.arregloCita)); // Depuración
+
             vista_gestion.getModeloTabla().addRow(arreglo_gestionCitas.arregloCita);
             guardarCitaEnArchivo(arreglo_gestionCitas);
+
             JOptionPane.showMessageDialog(vista_gestion, "Fila Agregada");
             vista_añadir.setVisible(false);
 

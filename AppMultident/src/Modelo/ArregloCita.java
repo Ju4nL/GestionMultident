@@ -14,7 +14,7 @@ public class ArregloCita {
 
     SimpleDateFormat formato_fecha = new SimpleDateFormat("dd/mm/yyyy");
     SimpleDateFormat formato_hora = new SimpleDateFormat("hh:mm");
-    public String[] arregloCita = new String[7];
+    public String[] arregloCita = new String[6];
 
     public ArregloCita(Cita arc1) {
         arregloCita[0] = String.valueOf(arc1.getIdCita());
