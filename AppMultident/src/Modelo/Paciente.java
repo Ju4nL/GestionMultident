@@ -9,12 +9,25 @@ package Modelo;
  * @author USER
  */
 public class Paciente {
+//<<<<<<< HEAD
+    int idPaciente;
+    String nombrePaciente;
+    String apellidoPaciente;
+    String telefonoPaciente;
+    String emailPaciente;
+    String direccionPaciente;
+    
+    public String StringIdPaciente(){
+        return Integer.toString(idPaciente);
+    }
+//=======
     private int idPaciente;
     private String nombre;
     private String apellido;
     private String telefono;
     private String email;
     private String direccion;
+//>>>>>>> 452b672a70c28f9e6fd5e6872b5ccf0463c16678
 
     // Constructor
     public Paciente(int idPaciente, String nombre, String apellido, String telefono, String email, String direccion) {

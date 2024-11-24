@@ -17,12 +17,11 @@ public class ArregloCita {
     public String[] arregloCita = new String[7];
 
     public ArregloCita(Cita arc1) {
-        arregloCita[0] = arc1.getIdcita();
-        arregloCita[1] = arc1.getDni_cliente();
-        arregloCita[2] = arc1.getNombre_cliente();
-        arregloCita[3] = arc1.getApellido_cliente();
-        arregloCita[4] = arc1.getTelefono_cliente();
-        arregloCita[5] = formato_fecha.format(arc1.getFecha());
-        arregloCita[6] = formato_hora.format(arc1.getHora());
+        arregloCita[0] = String.valueOf(arc1.getIdCita());
+        arregloCita[1] = String.valueOf(arc1.getPaciente().getNombre());
+        arregloCita[2] = String.valueOf(arc1.getOdontologo().getNombre());
+        arregloCita[3] = arc1.getEstado();
+        arregloCita[4] = String.valueOf(formato_fecha.format(arc1.getFecha()));
+        arregloCita[5] = String.valueOf(formato_fecha.format(arc1.getHora()));
     }
 }
