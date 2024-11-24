@@ -4,15 +4,9 @@
  */
 package appmultident;
 
-import Controlador.ControladorCitas;
-import Controlador.ControladorLogin;
 import Controlador.ControladorOdontologos;
 import Modelo.LoginModel;
-import Vista.VistaGestionCitas;
 import Vista.VistaGestionOdontologo;
-import Vista.VistaGestionPacientes;
-import Vista.VistaHome;
-import Vista.VistaLogin;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import javax.swing.UIManager;
 

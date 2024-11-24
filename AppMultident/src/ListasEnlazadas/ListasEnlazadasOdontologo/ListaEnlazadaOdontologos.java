@@ -59,6 +59,28 @@ public class ListaEnlazadaOdontologos {
         return null; // No encontrado
     }
 
+    public Odontologo buscarPorNombre(String nombre) {
+        NodoOdontologo temp = cabeza;
+        while (temp != null) {
+            if (temp.getDato().getNombre().equalsIgnoreCase(nombre)) {
+                return temp.getDato();
+            }
+            temp = temp.getSiguiente();
+        }
+        return null; // No encontrado
+    }
+
+    public Odontologo buscarPorEspecialidad(String especialidad) {
+        NodoOdontologo temp = cabeza;
+        while (temp != null) {
+            if (temp.getDato().getEspecialidad().equalsIgnoreCase(especialidad)) {
+                return temp.getDato();
+            }
+            temp = temp.getSiguiente();
+        }
+        return null; // No encontrado
+    }
+
     // Método para eliminar un odontólogo por ID
     public void eliminarPorId(int id) {
         if (cabeza == null) {

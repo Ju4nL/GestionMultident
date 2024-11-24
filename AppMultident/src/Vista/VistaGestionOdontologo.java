@@ -22,11 +22,19 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
      * Creates new form VistaGestionCitas
      */
     public VistaGestionOdontologo() {
+        initComponents(); // Inicializa todos los componentes, incluida la tabla
+        inicializarTabla(); // Ahora puedes inicializar la tabla sin problemas
+    }
 
-        String[] columnas_listado = {"ID Paciente", "Apellido", "Telefono", "Email", "Direccion"};
-        initComponents();
-        mt.setColumnIdentifiers(columnas_listado);
-        tablaGestionCitas.setModel(mt);
+    public void inicializarTabla() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Especialidad");
+        modelo.addColumn("Teléfono");
+        modelo.addColumn("Email");
+        modelo.addColumn("N° Colegiatura");
+        tablaOdontologo.setModel(modelo); // Asigna el modelo a la tabla
     }
 
     public JButton getBtnBuscar() {
@@ -50,11 +58,21 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
     }
 
     public JTable getTablaGestionCitas() {
-        return tablaGestionCitas;
+        return tablaOdontologo;
     }
 
     public JTextField getTxtBuscar() {
         return txtBuscar;
+    }
+
+    public void limpiarTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) tablaOdontologo.getModel();
+        modelo.setRowCount(0); // Borra todas las filas
+    }
+
+    public void agregarFilaTabla(Object[] fila) {
+        DefaultTableModel modelo = (DefaultTableModel) tablaOdontologo.getModel();
+        modelo.addRow(fila);
     }
 
     /**
@@ -73,7 +91,7 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
         btnOpcionAtras = new javax.swing.JButton();
         btnOpcionEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaGestionCitas = new javax.swing.JTable();
+        tablaOdontologo = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
 
@@ -153,7 +171,7 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
                 .addGap(27, 27, 27))
         );
 
-        tablaGestionCitas.setModel(new javax.swing.table.DefaultTableModel(
+        tablaOdontologo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -175,7 +193,7 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tablaGestionCitas);
+        jScrollPane1.setViewportView(tablaOdontologo);
 
         btnBuscar.setText("Buscar");
 
@@ -255,7 +273,7 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
     public javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JPanel panelOpciones;
-    public javax.swing.JTable tablaGestionCitas;
+    public javax.swing.JTable tablaOdontologo;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

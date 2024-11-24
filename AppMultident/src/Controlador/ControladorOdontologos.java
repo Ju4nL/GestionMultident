@@ -7,6 +7,7 @@ package Controlador;
 import ListasEnlazadas.ListasEnlazadasOdontologo.ListaEnlazadaOdontologos;
 import ListasEnlazadas.ListasEnlazadasOdontologo.NodoOdontologo;
 import Modelo.Odontologo;
+import Persistencia.DatosOdontologos;
 import Vista.VistaAñadirOdontologo;
 import Vista.VistaGestionOdontologo;
 import java.awt.event.ActionEvent;
@@ -28,6 +29,7 @@ public class ControladorOdontologos implements ActionListener {
     public ControladorOdontologos(VistaGestionOdontologo vistaGestionOdontologos) {
         this.vistaGestionOdontologos = vistaGestionOdontologos;
         this.listaOdontologos = new ListaEnlazadaOdontologos();
+        this.listaOdontologos = DatosOdontologos.recuperarDeArchivo();
         initComponents();
     }
 
@@ -39,18 +41,21 @@ public class ControladorOdontologos implements ActionListener {
         vistaGestionOdontologos.getBtnOpcionActualizar().addActionListener(this);
 
         // Inicializar la vista principal mostrando los datos actuales
-        //cargarTablaOdontologos();
+        cargarTablaOdontologos();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Aquí manejas los eventos de los botones
+        
+
         if (e.getSource() == vistaGestionOdontologos.getBtnOpcionAñadir()) {
             abrirVistaAñadirOdontologo();
         } else if (e.getSource() == vistaGestionOdontologos.getBtnOpcionEliminar()) {
-            //eliminarOdontologo();
+            eliminarOdontologo();
+        } else if (e.getSource() == vistaGestionOdontologos.getBtnOpcionActualizar()) {
+            actualizarOdontologo();
         } else if (e.getSource() == vistaGestionOdontologos.getBtnBuscar()) {
-            //consultarOdontologo();
+//            buscarOdontologo();
         }
     }
 
@@ -62,48 +67,128 @@ public class ControladorOdontologos implements ActionListener {
 
     private void guardarNuevoOdontologo() {
         try {
-            // Generar un nuevo ID
             int id = listaOdontologos.obtenerMaximoId() + 1;
-
-            // Leer datos desde los campos de texto
             String nombre = vistaAñadirOdontologs.getTextoNombre().getText();
             String especialidad = vistaAñadirOdontologs.getTextoEspecialidad().getText();
             String telefono = vistaAñadirOdontologs.getTextoTelefono().getText();
             String email = vistaAñadirOdontologs.getTextoEmail().getText();
             String numeroColegiatura = vistaAñadirOdontologs.getTextoNumeroColegiatura().getText();
 
-            // Crear y agregar el odontólogo
             Odontologo nuevoOdontologo = new Odontologo(id, nombre, especialidad, telefono, email, numeroColegiatura);
             listaOdontologos.agregar(nuevoOdontologo);
 
-            // Guardar en el archivo y actualizar la vista
-            guardarListaEnArchivo();
+            guardarLista(); // Guardar la lista en el archivo
             vistaGestionOdontologos.displaySucessMessage("Odontólogo añadido correctamente.");
-
-            // Cerrar la ventana de añadir
+            cargarTablaOdontologos(); // Actualizar la tabla
             vistaAñadirOdontologs.dispose();
         } catch (Exception e) {
             vistaAñadirOdontologs.displayErrorMessage("Error: Verifica los datos ingresados.");
         }
     }
 
-    private void guardarListaEnArchivo() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Odontologo.FILE_PATH))) {
-            NodoOdontologo temp = listaOdontologos.getCabeza(); // Obtener la cabeza de la lista
-            while (temp != null) {
-                // Escribir cada odontólogo como una línea en el archivo
-                Odontologo odontologo = temp.getDato();
-                writer.write(odontologo.getIdOdontologo() + ","
-                        + odontologo.getNombre() + ","
-                        + odontologo.getEspecialidad() + ","
-                        + odontologo.getTelefono() + ","
-                        + odontologo.getEmail() + ","
-                        + odontologo.getNumeroColegiatura());
-                writer.newLine();
-                temp = temp.getSiguiente();
+    private void guardarLista() {
+        DatosOdontologos.guardarEnArchivo(listaOdontologos);
+    }
+
+    private void cargarTablaOdontologos() {
+        // Limpia la tabla actual
+        vistaGestionOdontologos.limpiarTabla();
+
+        // Recorrer la lista enlazada y agregar cada odontólogo a la tabla
+        NodoOdontologo temp = listaOdontologos.getCabeza();
+        while (temp != null) {
+            Odontologo odontologo = temp.getDato();
+            vistaGestionOdontologos.agregarFilaTabla(new Object[]{
+                odontologo.getIdOdontologo(),
+                odontologo.getNombre(),
+                odontologo.getEspecialidad(),
+                odontologo.getTelefono(),
+                odontologo.getEmail(),
+                odontologo.getNumeroColegiatura()
+            });
+            temp = temp.getSiguiente();
+        }
+    }
+
+    private void actualizarOdontologo() {
+        try {
+            // Obtener la fila seleccionada en la tabla
+            int filaSeleccionada = vistaGestionOdontologos.getTablaGestionCitas().getSelectedRow();
+            if (filaSeleccionada == -1) {
+                vistaGestionOdontologos.displayErrorMessage("Por favor, selecciona un odontólogo para actualizar.");
+                return;
             }
-        } catch (IOException e) {
-            vistaGestionOdontologos.displayErrorMessage("Error al guardar los odontólogos en el archivo.");
+
+            // Obtener el ID del odontólogo desde la tabla
+            int id = (int) vistaGestionOdontologos.getTablaGestionCitas().getValueAt(filaSeleccionada, 0);
+
+            // Buscar el odontólogo en la lista enlazada
+            Odontologo odontologo = listaOdontologos.buscarPorId(id);
+            if (odontologo == null) {
+                vistaGestionOdontologos.displayErrorMessage("No se encontró el odontólogo seleccionado.");
+                return;
+            }
+
+            // Mostrar la vista de actualizar con los datos actuales del odontólogo
+            vistaAñadirOdontologs = new VistaAñadirOdontologo();
+            vistaAñadirOdontologs.getTextoNombre().setText(odontologo.getNombre());
+            vistaAñadirOdontologs.getTextoEspecialidad().setText(odontologo.getEspecialidad());
+            vistaAñadirOdontologs.getTextoTelefono().setText(odontologo.getTelefono());
+            vistaAñadirOdontologs.getTextoEmail().setText(odontologo.getEmail());
+            vistaAñadirOdontologs.getTextoNumeroColegiatura().setText(odontologo.getNumeroColegiatura());
+            vistaAñadirOdontologs.setVisible(true);
+
+            // Asociar el botón "Guardar" para guardar los cambios
+            vistaAñadirOdontologs.getBtnGuardar().addActionListener(e -> {
+                try {
+                    // Actualizar los datos del odontólogo
+                    odontologo.setNombre(vistaAñadirOdontologs.getTextoNombre().getText());
+                    odontologo.setEspecialidad(vistaAñadirOdontologs.getTextoEspecialidad().getText());
+                    odontologo.setTelefono(vistaAñadirOdontologs.getTextoTelefono().getText());
+                    odontologo.setEmail(vistaAñadirOdontologs.getTextoEmail().getText());
+                    odontologo.setNumeroColegiatura(vistaAñadirOdontologs.getTextoNumeroColegiatura().getText());
+
+                    // Guardar la lista actualizada en el archivo
+                    guardarLista();
+
+                    // Actualizar la tabla
+                    cargarTablaOdontologos();
+
+                    vistaGestionOdontologos.displaySucessMessage("Odontólogo actualizado correctamente.");
+                    vistaAñadirOdontologs.dispose();
+                } catch (Exception ex) {
+                    vistaAñadirOdontologs.displayErrorMessage("Error al actualizar el odontólogo.");
+                }
+            });
+        } catch (Exception e) {
+            vistaGestionOdontologos.displayErrorMessage("Error al intentar actualizar el odontólogo.");
+        }
+    }
+
+    private void eliminarOdontologo() {
+        try {
+            // Obtener la fila seleccionada en la tabla
+            int filaSeleccionada = vistaGestionOdontologos.getTablaGestionCitas().getSelectedRow();
+            if (filaSeleccionada == -1) {
+                vistaGestionOdontologos.displayErrorMessage("Por favor, selecciona un odontólogo para eliminar.");
+                return;
+            }
+
+            // Obtener el ID del odontólogo desde la tabla
+            int id = (int) vistaGestionOdontologos.getTablaGestionCitas().getValueAt(filaSeleccionada, 0);
+
+            // Eliminar el odontólogo de la lista enlazada
+            listaOdontologos.eliminarPorId(id);
+
+            // Guardar la lista actualizada en el archivo
+            guardarLista();
+
+            // Actualizar la tabla
+            cargarTablaOdontologos();
+
+            vistaGestionOdontologos.displaySucessMessage("Odontólogo eliminado correctamente.");
+        } catch (Exception e) {
+            vistaGestionOdontologos.displayErrorMessage("Error al eliminar el odontólogo.");
         }
     }
 
