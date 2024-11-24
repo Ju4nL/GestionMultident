@@ -5,6 +5,7 @@
 package Vista;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import javax.swing.JButton;
  
 
 /**
@@ -26,6 +27,28 @@ public class VistaHome extends javax.swing.JFrame {
                 + "border:20,2,2,2;"
                 + "arc:25");
     }
+
+    public JButton getBtnCitas() {
+        return btnCitas;
+    }
+
+    public JButton getBtnInventario() {
+        return btnInventario;
+    }
+
+    public JButton getBtnOdontologos() {
+        return btnOdontologos;
+    }
+
+    public JButton getBtnPacientes() {
+        return btnPacientes;
+    }
+
+    public JButton getBtnSalir() {
+        return btnSalir;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

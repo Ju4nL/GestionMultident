@@ -5,6 +5,7 @@
 package Vista;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -24,6 +25,8 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
     public VistaGestionOdontologo() {
         initComponents(); // Inicializa todos los componentes, incluida la tabla
         inicializarTabla(); // Ahora puedes inicializar la tabla sin problemas
+        setLocationRelativeTo(null);
+         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     public void inicializarTabla() {
@@ -125,6 +128,11 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
         btnOpcionAtras.setForeground(new java.awt.Color(0, 0, 0));
         btnOpcionAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/atras.png"))); // NOI18N
         btnOpcionAtras.setText("Atrás");
+        btnOpcionAtras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnOpcionAtrasMousePressed(evt);
+            }
+        });
         btnOpcionAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOpcionAtrasActionPerformed(evt);
@@ -254,6 +262,11 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
     private void btnOpcionEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionEliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnOpcionEliminarActionPerformed
+
+    private void btnOpcionAtrasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOpcionAtrasMousePressed
+
+         this.dispose();
+    }//GEN-LAST:event_btnOpcionAtrasMousePressed
 
     public void displayErrorMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Error Login", JOptionPane.ERROR_MESSAGE);

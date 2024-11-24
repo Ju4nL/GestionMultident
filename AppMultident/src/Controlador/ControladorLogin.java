@@ -1,8 +1,7 @@
 package Controlador;
 
 import Modelo.LoginModel;
-import Vista.VistaLogin;
-import Vista.VistaHome;
+import Vista.VistaLogin; 
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,13 +45,15 @@ public class ControladorLogin {
             if (loginModel.verifyPassword(password, user[1])) {
                 String role = user[2];
                 if ("ADMIN".equalsIgnoreCase(role.trim())) {
+
                     System.out.println("Login exitoso como administrador.");
 
-                    // Mostrar la vista de inicio
-                    VistaHome vistaHome = new VistaHome();
-                    vistaHome.setVisible(true);
+                    // Crear el controlador principal
+                    ControladorPrincipal controladorPrincipal = new ControladorPrincipal(); 
 
-                    vistaLogin.dispose();  // Cierra la ventana de login
+                    // Cerrar la vista de login
+                    vistaLogin.dispose();
+
                 } else {
                     vistaLogin.displayErrorMessage("Acceso denegado. Solo los administradores pueden acceder.");
                 }

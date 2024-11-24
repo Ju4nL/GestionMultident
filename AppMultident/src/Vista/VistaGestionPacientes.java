@@ -4,7 +4,11 @@
  */
 package Vista;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,11 +24,59 @@ public class VistaGestionPacientes extends javax.swing.JFrame {
      * Creates new form VistaGestionCitas
      */
     public VistaGestionPacientes() {
-        
-        String[] columnas_listado = {"ID Paciente", "Apellido", "Telefono", "Email", "Direccion"};
-        initComponents();
-        mt.setColumnIdentifiers(columnas_listado);
-        tablaGestionCitas.setModel(mt);
+         
+        initComponents(); 
+        inicializarTabla();
+        setLocationRelativeTo(null);
+         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+    
+    public void inicializarTabla() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Teléfono");
+        modelo.addColumn("Email");
+        modelo.addColumn("Direccion");
+        tablaPacientes.setModel(modelo); // Asigna el modelo a la tabla
+    }
+    public JButton getBtnBuscar() {
+        return btnBuscar;
+    }
+
+    public JButton getBtnOpcionActualizar() {
+        return btnOpcionActualizar;
+    }
+
+    public JButton getBtnOpcionAtras() {
+        return btnOpcionAtras;
+    }
+
+    public JButton getBtnOpcionAñadir() {
+        return btnOpcionAñadir;
+    }
+
+    public JButton getBtnOpcionEliminar() {
+        return btnOpcionEliminar;
+    }
+
+    public JTable getTablaPacientes() {
+        return tablaPacientes;
+    }
+
+    public JTextField getTextoBuscar() {
+        return textoBuscar;
+    }
+    
+    public void limpiarTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) tablaPacientes.getModel();
+        modelo.setRowCount(0); // Borra todas las filas
+    }
+
+    public void agregarFilaTabla(Object[] fila) {
+        DefaultTableModel modelo = (DefaultTableModel) tablaPacientes.getModel();
+        modelo.addRow(fila);
     }
 
     /**
@@ -43,7 +95,9 @@ public class VistaGestionPacientes extends javax.swing.JFrame {
         btnOpcionAtras = new javax.swing.JButton();
         btnOpcionEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaGestionCitas = new javax.swing.JTable();
+        tablaPacientes = new javax.swing.JTable();
+        btnBuscar = new javax.swing.JButton();
+        textoBuscar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,6 +129,11 @@ public class VistaGestionPacientes extends javax.swing.JFrame {
         btnOpcionAtras.setForeground(new java.awt.Color(0, 0, 0));
         btnOpcionAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/atras.png"))); // NOI18N
         btnOpcionAtras.setText("Atrás");
+        btnOpcionAtras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnOpcionAtrasMousePressed(evt);
+            }
+        });
         btnOpcionAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOpcionAtrasActionPerformed(evt);
@@ -121,7 +180,7 @@ public class VistaGestionPacientes extends javax.swing.JFrame {
                 .addGap(27, 27, 27))
         );
 
-        tablaGestionCitas.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -135,7 +194,9 @@ public class VistaGestionPacientes extends javax.swing.JFrame {
                 "ID Paciente", "Nombre", "Apellido", "Telefono", "Email"
             }
         ));
-        jScrollPane1.setViewportView(tablaGestionCitas);
+        jScrollPane1.setViewportView(tablaPacientes);
+
+        btnBuscar.setText("Buscar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -144,14 +205,23 @@ public class VistaGestionPacientes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(panelOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(textoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscar)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
@@ -186,9 +256,23 @@ public class VistaGestionPacientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnOpcionEliminarActionPerformed
 
+    private void btnOpcionAtrasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOpcionAtrasMousePressed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnOpcionAtrasMousePressed
+    
+        public void displayErrorMessage(String message) {
+        JOptionPane.showMessageDialog(this, message, "Error Login", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void displaySucessMessage(String message) {
+        JOptionPane.showMessageDialog(this, message);
+    }
+
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     public javax.swing.JButton btnOpcionActualizar;
     public javax.swing.JButton btnOpcionAtras;
     public javax.swing.JButton btnOpcionAñadir;
@@ -196,6 +280,7 @@ public class VistaGestionPacientes extends javax.swing.JFrame {
     public javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JPanel panelOpciones;
-    public javax.swing.JTable tablaGestionCitas;
+    public javax.swing.JTable tablaPacientes;
+    private javax.swing.JTextField textoBuscar;
     // End of variables declaration//GEN-END:variables
 }

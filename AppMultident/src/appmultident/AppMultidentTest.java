@@ -31,7 +31,8 @@ public class AppMultidentTest {
 
         // Crear el controlador, el cual manejará la vista y el modelo
         ControladorLogin loginController = new ControladorLogin(vistaLogin, loginModel);
-
+        
+        vistaLogin.setLocationRelativeTo(null);
         vistaLogin.setVisible(true);  // Mostrar la vista de login
     }
     

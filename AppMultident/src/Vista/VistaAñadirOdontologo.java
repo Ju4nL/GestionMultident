@@ -6,6 +6,7 @@ package Vista;
 
 import Modelo.Cita;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -20,6 +21,8 @@ public class VistaAñadirOdontologo extends javax.swing.JFrame {
      */
     public VistaAñadirOdontologo() {
         initComponents();
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     public JTextField getTextoEmail() {
