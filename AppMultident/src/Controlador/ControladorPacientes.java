@@ -1,12 +1,15 @@
 package Controlador;
 
-import Arboles.ArbolPaciente.ArbolPaciente; 
+import Arboles.ArbolPaciente.ArbolPaciente;
 import Modelo.Paciente;
 import Persistencia.DatosPacientes;
-import Vista.VistaAñadirPaciente; 
+import Vista.VistaAñadirPaciente;
 import Vista.VistaGestionPacientes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
 
 public class ControladorPacientes implements ActionListener {
 
@@ -26,6 +29,7 @@ public class ControladorPacientes implements ActionListener {
         vistaGestionPacientes.getBtnOpcionEliminar().addActionListener(this);
         vistaGestionPacientes.getBtnBuscar().addActionListener(this);
         vistaGestionPacientes.getBtnOpcionActualizar().addActionListener(this);
+        vistaGestionPacientes.getBtnOrdenar().addActionListener(this);
 
         // Cargar pacientes en la tabla
         cargarTablaPacientes();
@@ -41,6 +45,8 @@ public class ControladorPacientes implements ActionListener {
             actualizarPaciente();
         } else if (e.getSource() == vistaGestionPacientes.getBtnBuscar()) {
             buscarPaciente();
+        } else if (e.getSource() == vistaGestionPacientes.getBtnOrdenar()) {
+            ordenarPacientes();
         }
     }
 
@@ -139,43 +145,102 @@ public class ControladorPacientes implements ActionListener {
                 return;
             }
 
+            // Obtener el ID y nombre del paciente seleccionado para mostrar en el mensaje de confirmación
             int id = (int) vistaGestionPacientes.getTablaPacientes().getValueAt(filaSeleccionada, 0);
-            arbolPacientes.eliminar(id); // Eliminar del árbol
+            String nombre = (String) vistaGestionPacientes.getTablaPacientes().getValueAt(filaSeleccionada, 1);
 
-            guardarLista(); // Guardar cambios
-            cargarTablaPacientes(); // Actualizar la tabla
-            vistaGestionPacientes.displaySucessMessage("Paciente eliminado correctamente.");
-        } catch (Exception e) {
-            vistaGestionPacientes.displayErrorMessage("Error al eliminar el paciente.");
-        }
-    }
+            // Mostrar cuadro de diálogo de confirmación
+            int confirmacion = JOptionPane.showConfirmDialog(
+                    vistaGestionPacientes,
+                    "¿Estás seguro de eliminar al paciente \"" + nombre + "\" con ID " + id + "?",
+                    "Confirmar eliminación",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+            );
 
-    // Método para buscar un paciente
-    private void buscarPaciente() {
-        try {
-            int id = Integer.parseInt(vistaGestionPacientes.getTextoBuscar().getText());
-            Paciente paciente = arbolPacientes.buscar(id);
-
-            if (paciente != null) {
-                vistaGestionPacientes.limpiarTabla(); // Mostrar solo el resultado
-                vistaGestionPacientes.agregarFilaTabla(new Object[]{
-                    paciente.getIdPaciente(),
-                    paciente.getNombre(),
-                    paciente.getApellido(),
-                    paciente.getTelefono(),
-                    paciente.getEmail(),
-                    paciente.getDireccion()
-                });
-            } else {
-                vistaGestionPacientes.displayErrorMessage("Paciente no encontrado.");
+            // Si el usuario selecciona "Sí", proceder con la eliminación
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                arbolPacientes.eliminar(id); // Eliminar del árbol
+                guardarLista(); // Guardar cambios
+                cargarTablaPacientes(); // Actualizar la tabla
+                vistaGestionPacientes.displaySucessMessage("Paciente eliminado correctamente.");
             }
         } catch (Exception e) {
-            vistaGestionPacientes.displayErrorMessage("Error al buscar el paciente.");
+            vistaGestionPacientes.displayErrorMessage("Error al eliminar el paciente.");
         }
     }
 
     // Método para guardar el árbol en un archivo
     private void guardarLista() {
         DatosPacientes.guardarEnArchivo(arbolPacientes);
+    }
+
+    private void buscarPaciente() {
+        try {
+            String criterioBusqueda = vistaGestionPacientes.getCbxCriterio().getSelectedItem().toString();
+            String valorBusqueda = vistaGestionPacientes.getTextoBuscar().getText();
+
+            List<Paciente> resultados = switch (criterioBusqueda) {
+                case "ID" -> {
+                    Paciente paciente = arbolPacientes.buscar(Integer.parseInt(valorBusqueda));
+                    yield paciente != null ? List.of(paciente) : List.of();
+                }
+                case "Nombre" ->
+                    arbolPacientes.recorrerInOrder()
+                    .stream()
+                    .filter(p -> p.getNombre().equalsIgnoreCase(valorBusqueda))
+                    .collect(Collectors.toList());
+                case "Apellido" ->
+                    arbolPacientes.recorrerInOrder()
+                    .stream()
+                    .filter(p -> p.getApellido().equalsIgnoreCase(valorBusqueda))
+                    .collect(Collectors.toList());
+                default ->
+                    List.of();
+            };
+
+            if (resultados.isEmpty()) {
+                vistaGestionPacientes.displayErrorMessage("No se encontraron resultados para la búsqueda.");
+            } else {
+                mostrarResultadoBusqueda(resultados);
+            }
+        } catch (Exception e) {
+            vistaGestionPacientes.displayErrorMessage("Escriba algo para buscar.");
+        }
+    }
+
+    private void ordenarPacientes() {
+        String criterioOrden = vistaGestionPacientes.getCbxCriterio().getSelectedItem().toString();
+
+        List<Paciente> pacientesOrdenados = switch (criterioOrden) {
+            case "ID" ->
+                arbolPacientes.recorrerInOrder();
+            case "Nombre" ->
+                arbolPacientes.recorrerInOrder()
+                .stream()
+                .sorted((p1, p2) -> p1.getNombre().compareToIgnoreCase(p2.getNombre()))
+                .collect(Collectors.toList());
+            case "Apellido" ->
+                arbolPacientes.recorrerInOrder()
+                .stream()
+                .sorted((p1, p2) -> p1.getApellido().compareToIgnoreCase(p2.getApellido()))
+                .collect(Collectors.toList());
+            default ->
+                arbolPacientes.recorrerInOrder();
+        };
+
+        mostrarResultadoBusqueda(pacientesOrdenados);
+    }
+
+    private void mostrarResultadoBusqueda(List<Paciente> pacientes) {
+        vistaGestionPacientes.limpiarTabla();
+        pacientes.forEach(paciente -> vistaGestionPacientes.agregarFilaTabla(new Object[]{
+            paciente.getIdPaciente(),
+            paciente.getNombre(),
+            paciente.getApellido(),
+            paciente.getTelefono(),
+            paciente.getEmail(),
+            paciente.getDireccion()
+        }));
     }
 }
