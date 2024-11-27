@@ -4,6 +4,7 @@ public class Tratamiento {
     private String nombre;
     private double costo;
     private String descripcion;
+    
 
     public Tratamiento(String nombre, double costo, String descripcion) {
         this.nombre = nombre;

@@ -1,13 +1,13 @@
 package appmultident;
-
+import modelo.Tratamiento;
 import controlador.ControladorTratamiento;
-import vista.VistaTratamiento;
+import Vista.VistaTratamiento;
 
-public class AppMultidentControlador {
+public class AppMultidentTratamiento {
     public static void main(String[] args) {
-        ControladorTratamiento controlador = new ControladorTratamiento();
-        VistaTratamiento vista = new VistaTratamiento(controlador);
-        
-        vista.setVisible(true);
+    Tratamiento Trata = new Tratamiento();
+    VistaTratamiento Vtrata = new VistaTratamiento();
+    ControladorTratamiento crtl = new ControladorTratamiento(Trata, Vtrata);
+    
     }
 }
