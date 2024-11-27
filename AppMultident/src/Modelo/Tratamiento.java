@@ -1,18 +1,59 @@
-package modelo;
-
+package Modelo;
+/**
+ *
+ * @author JUNIOR
+ */
 public class Tratamiento {
+    private String nombreDoc;
+    private String telefonoDoc;
+    private String correoDoc;
+    private String nombreP;
+    private String direccionP;
     private String nombre;
     private double costo;
-    private String descripcion;
+    private String observaciones;
     
 
-    public Tratamiento(String nombre, double costo, String descripcion) {
-        this.nombre = nombre;
-        this.costo = costo;
-        this.descripcion = descripcion;
+    public String getNombreDoc() {
+        return nombreDoc;
     }
 
-    // Getters y Setters
+    public void setNombreDoc(String nombreDoc) {
+        this.nombreDoc = nombreDoc;
+    }
+
+    public String getTelefonoDoc() {
+        return telefonoDoc;
+    }
+
+    public void setTelefonoDoc(String telefonoDoc) {
+        this.telefonoDoc = telefonoDoc;
+    }
+
+    public String getCorreoDoc() {
+        return correoDoc;
+    }
+
+    public void setCorreoDoc(String correoDoc) {
+        this.correoDoc = correoDoc;
+    }
+
+    public String getNombreP() {
+        return nombreP;
+    }
+
+    public void setNombreP(String nombreP) {
+        this.nombreP = nombreP;
+    }
+
+    public String getDireccionP() {
+        return direccionP;
+    }
+
+    public void setDireccionP(String direccionP) {
+        this.direccionP = direccionP;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -29,20 +70,21 @@ public class Tratamiento {
         this.costo = costo;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getObservaciones() {
+        return observaciones;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
     }
 
+    
     @Override
     public String toString() {
         return "Tratamiento{" +
                 "nombre='" + nombre + '\'' +
                 ", costo=" + costo +
-                ", descripcion='" + descripcion + '\'' +
+                ", observaciones='" + observaciones + '\'' +
                 '}';
     }
 }

@@ -1,22 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Vista;
 
 /**
  *
  * @author JUNIOR
  */
-public class vistaTratamiento extends javax.swing.JFrame {
+import Controlador.ControladorTratamiento;
+import javax.swing.JOptionPane;
+import javax.swing.JButton;
 
-    /**
-     * Creates new form vistaTratamiento
-     */
+public class vistaTratamiento extends javax.swing.JFrame {
+    
+    private ControladorTratamiento ctrlTratamiento = new ControladorTratamiento();
+
     public vistaTratamiento() {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -207,7 +206,20 @@ public class vistaTratamiento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+    String nombreDoc = txtNombreDoc.getText();
+    String telefonoDoc = txtTelefonoDoc.getText();
+    String correoDoc = txtCorreoDoc.getText();
+    String nombreP = txtNombreP.getText();
+    String direccionP = txtDireccionP.getText();
+    String telefonoP = txtTelefonoP.getText();
+    String observaciones = txtObservaciones.getText();
+    String tratamiento = txtTratamiento.getText();
+    
+    // Llamar al controlador para agregar el tratamiento (suponiendo que tienes un método en el controlador)
+    ctrlTratamiento.agregarTratamiento(nombreDoc, telefonoDoc, correoDoc, nombreP, direccionP, telefonoP, observaciones, tratamiento);
+    
+    // Mostrar un mensaje de confirmación (opcional)
+    JOptionPane.showMessageDialog(this, "Tratamiento agregado exitosamente");
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -225,6 +237,9 @@ public class vistaTratamiento extends javax.swing.JFrame {
     private void txtDireccionPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionPActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDireccionPActionPerformed
+     public JButton getBtnAgregar() {
+    return btnAgregar;
+}
 
     /**
      * @param args the command line arguments

@@ -1,27 +1,27 @@
 package controlador;
 
-import modelo.Modelo; // Asegúrate de que la clase Modelo esté en el paquete correcto
+import  Modelo.modeloProductos; // Asegúrate de que la clase Modelo esté en el paquete correcto
 import java.util.ArrayList;
 import java.util.List;
 import vista.Vista;
 
-public class ControladorProducto {
-    private final List<Modelo> productos;
+public class controladorproducto {
+    private final List<modeloProductos> productos;
 
-    public ControladorProducto(Vista view, Modelo mod) {
+    public controladorproducto(Vista view, modeloProductos mod) {
         this.productos = new ArrayList<>();
     }
 
     public static void main(String[] args) {
         // Crear instancias de Vista y Modelo
         Vista view = new Vista(); // Asegúrate de que la clase Vista esté correctamente definida
-        Modelo mod = new Modelo(); // Asegúrate de que la clase Modelo tenga un constructor sin parámetros
+        modeloProductos mod = new modeloProductos(); // Asegúrate de que la clase Modelo tenga un constructor sin parámetros
 
-        ControladorProducto controlador = new ControladorProducto(view, mod);
+        controladorProducto controlador = new controladorProducto(view, mod);
 
         // Crear productos
-        Modelo producto1 = new Modelo("hilo dental", 15.00, "fibra de 3 metros", "HD001");
-        Modelo producto2 = new Modelo("Cepillo electrico", 45.00, "bateria recargable", "CE002");
+        modeloProductos producto1 = new modeloProductos("hilo dental", 15.00, "fibra de 3 metros", "HD001");
+        modeloProductos producto2 = new modeloProductos("Cepillo electrico", 45.00, "bateria recargable", "CE002");
 
         // Agregar productos
         controlador.agregarProducto(producto1);
@@ -29,12 +29,12 @@ public class ControladorProducto {
 
         // Listar productos
         System.out.println("Lista de productos:");
-        for (Modelo producto : controlador.listarProductos()) {
+        for (modeloProductos producto : controlador.listarProductos()) {
             System.out.println(producto);
         }
 
         // Buscar producto
-        Modelo buscado = controlador.buscarProductoPorCodigo("HD001");
+        modeloProductos buscado = controlador.buscarProductoPorCodigo("HD001");
         if (buscado != null) {
             System.out.println("Producto encontrado: " + buscado);
         } else {
@@ -42,7 +42,7 @@ public class ControladorProducto {
         }
 
         // Actualizar producto
-        Modelo productoActualizado = new Modelo("HilO dental", 23.00, "fibra delgada de 5 metros", "HD001");
+        modeloProductos productoActualizado = new modeloProductos("HilO dental", 23.00, "fibra delgada de 5 metros", "HD001");
         controlador.actualizarProducto("HD001", productoActualizado); // Cambié "P001" a "HD001"
 
         // Eliminar producto
@@ -50,20 +50,20 @@ public class ControladorProducto {
 
         // Listar productos después de modificaciones
         System.out.println("Lista de productos actualizada:");
-        for (Modelo producto : controlador.listarProductos()) {
+        for (modeloProductos producto : controlador.listarProductos()) {
             System.out.println(producto);
         }
     }
 
-    private void agregarProducto(Modelo producto) {
+    private void agregarProducto(modeloProductos producto) {
         productos.add(producto);
     }
 
-    private List<Modelo> listarProductos() {
+    private List<modeloProductos> listarProductos() {
         return productos;
     }
 
-    private void actualizarProducto(String codigo, Modelo productoActualizado) {
+    private void actualizarProducto(String codigo, modeloProductos productoActualizado) {
         for (int i = 0; i < productos.size(); i++) {
             if (productos.get(i).getCodigo().equals(codigo)) {
                 productos.set(i, productoActualizado);
@@ -73,8 +73,8 @@ public class ControladorProducto {
         System.out.println("Producto con código " + codigo + " no encontrado para actualizar.");
     }
 
-    private Modelo buscarProductoPorCodigo(String codigo) {
-        for (Modelo producto : productos) {
+    private modeloProductos buscarProductoPorCodigo(String codigo) {
+        for (modeloProductos producto : productos) {
             if (producto.getCodigo().equals(codigo)) {
                 return producto;
             }
