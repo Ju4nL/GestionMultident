@@ -18,6 +18,8 @@ public class Odontologo {
     private String numeroColegiatura;
     public static final String FILE_PATH = "src/Contenedores/Odontologos.txt";
     // Constructor
+    public Odontologo(){}
+    
     public Odontologo(int idOdontologo, String nombre, String especialidad, String telefono, String email, String numeroColegiatura) {
         this.idOdontologo = idOdontologo;
         this.nombre = nombre;

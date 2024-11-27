@@ -20,6 +20,7 @@ public class Paciente {
     private String direccion; 
 
     // Constructor
+    public Paciente (){}
     public Paciente(int idPaciente, String nombre, String apellido, String telefono, String email, String direccion) {
         this.idPaciente = idPaciente;
         this.nombre = nombre;

@@ -13,15 +13,18 @@ import java.util.Date;
  * @author USER
  */
 public class Cita {
-    
+
     private int idCita;
     private LocalDate fecha;
     private LocalTime hora;
     private String estado;
-    private Odontologo odontologo; 
+    private Odontologo odontologo;
     private Paciente paciente;
     
-    
+    public Cita() {
+        this.paciente = new Paciente(); 
+        this.odontologo = new Odontologo();  
+    }
 
     public int getIdCita() {
         return idCita;
@@ -47,6 +50,14 @@ public class Cita {
         this.hora = hora;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public Odontologo getOdontologo() {
         return odontologo;
     }
@@ -61,14 +72,6 @@ public class Cita {
 
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
-    }
-    
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 
     

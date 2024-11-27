@@ -82,7 +82,7 @@ public class ControladorAñadirCita implements ActionListener {
         cita.setIdCita(idrandom);
         cita.getPaciente().setIdPaciente(Integer.parseInt(vista_añadir.textoIdPaciente.getText()));
         cita.getOdontologo().setIdOdontologo(Integer.parseInt(vista_añadir.textoIdOdontologo.getText()));
-        cita.setEstado(vista_añadir.textoFecha.getText());
+        cita.setEstado(vista_añadir.textoEstado.getText());
         cita.setFecha(LocalDate.parse(vista_añadir.textoFecha.getText()));
         cita.setHora(LocalTime.parse(vista_añadir.textoHora.getText()));
 

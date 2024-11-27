@@ -50,6 +50,8 @@ public class ControladorCitas implements ActionListener{
         vista_gestion.btnOpcionEliminar.addActionListener(this);
         vista_gestion.btnOpcionAtras.addActionListener(this);
         cargarCitasDesdeArchivo(vista_gestion.getModeloTabla());
+        
+       
     }
     
 
