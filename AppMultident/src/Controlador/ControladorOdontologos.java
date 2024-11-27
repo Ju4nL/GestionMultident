@@ -4,17 +4,18 @@
  */
 package Controlador;
 
+import Busquedas.BusquedaOdontologos;
 import ListasEnlazadas.ListasEnlazadasOdontologo.ListaEnlazadaOdontologos;
 import ListasEnlazadas.ListasEnlazadasOdontologo.NodoOdontologo;
 import Modelo.Odontologo;
+import Ordenamientos.OrdenamientoOdontologos;
 import Persistencia.DatosOdontologos;
 import Vista.VistaAñadirOdontologo;
 import Vista.VistaGestionOdontologo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,6 +40,7 @@ public class ControladorOdontologos implements ActionListener {
         vistaGestionOdontologos.getBtnOpcionEliminar().addActionListener(this);
         vistaGestionOdontologos.getBtnBuscar().addActionListener(this);
         vistaGestionOdontologos.getBtnOpcionActualizar().addActionListener(this);
+        vistaGestionOdontologos.getBtnOrdenar().addActionListener(this); // Botón de ordenar
 
         // Inicializar la vista principal mostrando los datos actuales
         cargarTablaOdontologos();
@@ -46,8 +48,6 @@ public class ControladorOdontologos implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-
         if (e.getSource() == vistaGestionOdontologos.getBtnOpcionAñadir()) {
             abrirVistaAñadirOdontologo();
         } else if (e.getSource() == vistaGestionOdontologos.getBtnOpcionEliminar()) {
@@ -55,7 +55,9 @@ public class ControladorOdontologos implements ActionListener {
         } else if (e.getSource() == vistaGestionOdontologos.getBtnOpcionActualizar()) {
             actualizarOdontologo();
         } else if (e.getSource() == vistaGestionOdontologos.getBtnBuscar()) {
-//            buscarOdontologo();
+            buscarOdontologo();
+        } else if (e.getSource() == vistaGestionOdontologos.getBtnOrdenar()) {
+            ordenarOdontologos();
         }
     }
 
@@ -174,22 +176,123 @@ public class ControladorOdontologos implements ActionListener {
                 return;
             }
 
-            // Obtener el ID del odontólogo desde la tabla
+            // Obtener los datos del odontólogo seleccionado
             int id = (int) vistaGestionOdontologos.getTablaGestionCitas().getValueAt(filaSeleccionada, 0);
+            String nombre = (String) vistaGestionOdontologos.getTablaGestionCitas().getValueAt(filaSeleccionada, 1);
 
-            // Eliminar el odontólogo de la lista enlazada
-            listaOdontologos.eliminarPorId(id);
+            // Mostrar cuadro de confirmación
+            int confirmacion = JOptionPane.showConfirmDialog(
+                    vistaGestionOdontologos,
+                    "¿Estás seguro de eliminar al odontólogo \"" + nombre + "\" con ID " + id + "?",
+                    "Confirmar eliminación",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+            );
 
-            // Guardar la lista actualizada en el archivo
-            guardarLista();
+            // Si el usuario confirma la eliminación
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                // Eliminar el odontólogo de la lista enlazada
+                listaOdontologos.eliminarPorId(id);
 
-            // Actualizar la tabla
-            cargarTablaOdontologos();
+                // Guardar la lista actualizada en el archivo
+                guardarLista();
 
-            vistaGestionOdontologos.displaySucessMessage("Odontólogo eliminado correctamente.");
+                // Actualizar la tabla
+                cargarTablaOdontologos();
+
+                vistaGestionOdontologos.displaySucessMessage("Odontólogo eliminado correctamente.");
+            }
         } catch (Exception e) {
             vistaGestionOdontologos.displayErrorMessage("Error al eliminar el odontólogo.");
         }
+    }
+
+    private void buscarOdontologo() {
+        String criterioBusqueda = getCriterio();
+        String valorBusqueda = vistaGestionOdontologos.getTxtBuscar().getText();
+
+        switch (criterioBusqueda) {
+            case "ID":
+                int id = Integer.parseInt(valorBusqueda);
+                Odontologo resultadoId = BusquedaOdontologos.buscarPorIdBinaria(listaOdontologos, id);
+                mostrarResultadoBusqueda(resultadoId);
+                break;
+            case "Nombre":
+                Odontologo resultadoNombre = BusquedaOdontologos.buscarPorNombreLineal(listaOdontologos, valorBusqueda);
+                mostrarResultadoBusqueda(resultadoNombre);
+                break;
+            case "Especialidad":
+                List<Odontologo> resultadosEspecialidad = BusquedaOdontologos.buscarPorEspecialidad(listaOdontologos, valorBusqueda);
+                if (!resultadosEspecialidad.isEmpty()) {
+                    mostrarResultadoBusqueda(resultadosEspecialidad);
+                } else {
+                    vistaGestionOdontologos.displayErrorMessage("No se encontraron odontólogos con la especialidad " + valorBusqueda);
+                }
+                break;
+            default:
+                vistaGestionOdontologos.displayErrorMessage("Criterio de búsqueda no reconocido.");
+        }
+    }
+
+    private void ordenarOdontologos() {
+        String criterioOrden = getCriterio();
+
+        switch (criterioOrden) {
+            case "ID":
+                OrdenamientoOdontologos.ordenarPorIdBurbuja(listaOdontologos);
+                break;
+            case "Nombre":
+                OrdenamientoOdontologos.ordenarPorNombreInsercion(listaOdontologos);
+                break;
+            case "Especialidad":
+                OrdenamientoOdontologos.ordenarPorEspecialidadSeleccion(listaOdontologos);
+                break;
+            default:
+                vistaGestionOdontologos.displayErrorMessage("Criterio de ordenamiento no reconocido.");
+                return;
+        }
+
+        guardarLista();
+        cargarTablaOdontologos();
+        vistaGestionOdontologos.displaySucessMessage("Odontólogos ordenados por " + criterioOrden + ".");
+    }
+
+    private void mostrarResultadoBusqueda(Odontologo odontologo) {
+        if (odontologo != null) {
+            vistaGestionOdontologos.limpiarTabla();
+            vistaGestionOdontologos.agregarFilaTabla(new Object[]{
+                odontologo.getIdOdontologo(),
+                odontologo.getNombre(),
+                odontologo.getEspecialidad(),
+                odontologo.getTelefono(),
+                odontologo.getEmail(),
+                odontologo.getNumeroColegiatura()
+            });
+        } else {
+            vistaGestionOdontologos.displayErrorMessage("No se encontró el odontólogo.");
+        }
+    }
+
+    private void mostrarResultadoBusqueda(List<Odontologo> odontologos) {
+        if (odontologos != null && !odontologos.isEmpty()) {
+            vistaGestionOdontologos.limpiarTabla();
+            for (Odontologo odontologo : odontologos) {
+                vistaGestionOdontologos.agregarFilaTabla(new Object[]{
+                    odontologo.getIdOdontologo(),
+                    odontologo.getNombre(),
+                    odontologo.getEspecialidad(),
+                    odontologo.getTelefono(),
+                    odontologo.getEmail(),
+                    odontologo.getNumeroColegiatura()
+                });
+            }
+        } else {
+            vistaGestionOdontologos.displayErrorMessage("No se encontraron resultados.");
+        }
+    }
+
+    private String getCriterio() {
+        return vistaGestionOdontologos.getCbxCriterio().getSelectedItem().toString();
     }
 
 }

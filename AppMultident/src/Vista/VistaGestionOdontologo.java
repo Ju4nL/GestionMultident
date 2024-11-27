@@ -5,6 +5,7 @@
 package Vista;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -40,9 +41,7 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
         tablaOdontologo.setModel(modelo); // Asigna el modelo a la tabla
     }
 
-    public JButton getBtnBuscar() {
-        return btnBuscar;
-    }
+ 
 
     public JButton getBtnOpcionActualizar() {
         return btnOpcionActualizar;
@@ -60,12 +59,28 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
         return btnOpcionEliminar;
     }
 
+    public JComboBox<String> getCbxCriterio() {
+        return cbxCriterio;
+    }
+
     public JTable getTablaGestionCitas() {
         return tablaOdontologo;
     }
 
     public JTextField getTxtBuscar() {
         return txtBuscar;
+    }
+
+    public JButton getBtnOrdenar() {
+        return btnOrdenar;
+    }
+
+    public JButton getBtnBuscar() {
+        return btnBuscar;
+    }
+
+    public JTable getTablaOdontologo() {
+        return tablaOdontologo;
     }
 
     public void limpiarTabla() {
@@ -96,7 +111,9 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaOdontologo = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
+        btnOrdenar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
+        cbxCriterio = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -203,7 +220,11 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaOdontologo);
 
+        btnOrdenar.setText("Ordenar");
+
         btnBuscar.setText("Buscar");
+
+        cbxCriterio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Nombre", "Especialidad" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -216,8 +237,12 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbxCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnOrdenar)))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -227,7 +252,9 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
+                    .addComponent(btnOrdenar)
+                    .addComponent(btnBuscar)
+                    .addComponent(cbxCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -283,6 +310,8 @@ public class VistaGestionOdontologo extends javax.swing.JFrame {
     public javax.swing.JButton btnOpcionAtras;
     public javax.swing.JButton btnOpcionAñadir;
     public javax.swing.JButton btnOpcionEliminar;
+    private javax.swing.JButton btnOrdenar;
+    private javax.swing.JComboBox<String> cbxCriterio;
     public javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JPanel panelOpciones;

@@ -24,6 +24,10 @@ public class ListaEnlazadaOdontologos {
         return cabeza;
     }
 
+    public void setCabeza(NodoOdontologo cabeza) {
+        this.cabeza = cabeza;
+    }
+
     // Método para agregar un odontólogo
     public void agregar(Odontologo odontologo) {
         NodoOdontologo nuevoNodo = new NodoOdontologo(odontologo);
