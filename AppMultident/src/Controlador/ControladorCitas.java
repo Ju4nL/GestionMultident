@@ -4,6 +4,7 @@
  */
 package Controlador;
 
+import Colas.ColaGestionCitas;
 import Modelo.Cita;
 import Vista.VistaGestionCitas;
 import Vista.VistaAñadirCita;
@@ -61,7 +62,8 @@ public class ControladorCitas implements ActionListener{
         if(e.getSource()== vista_gestion.btnOpcionAñadir){
             Cita cita = new Cita();
             VistaAñadirCita va1= new VistaAñadirCita();
-            ControladorAñadirCita ca1 = new ControladorAñadirCita(va1,vista_gestion,cita);
+            ColaGestionCitas cgc1 = new ColaGestionCitas();
+            ControladorAñadirCita ca1 = new ControladorAñadirCita(va1,vista_gestion,cita,cgc1);
             ca1.iniciar();
             va1.setVisible(true);
             

@@ -12,8 +12,7 @@ import java.text.SimpleDateFormat;
  */
 public class ArregloCita {
 
-    SimpleDateFormat formato_fecha = new SimpleDateFormat("dd/mm/yyyy");
-    SimpleDateFormat formato_hora = new SimpleDateFormat("hh:mm");
+    
     public String[] arregloCita = new String[6];
 
     public ArregloCita(Cita arc1) {
@@ -21,7 +20,7 @@ public class ArregloCita {
         arregloCita[1] = String.valueOf(arc1.getPaciente().getIdPaciente());
         arregloCita[2] = String.valueOf(arc1.getOdontologo().getIdOdontologo());
         arregloCita[3] = arc1.getEstado();
-        arregloCita[4] = String.valueOf(formato_fecha.format(arc1.getFecha()));
-        arregloCita[5] = String.valueOf(formato_fecha.format(arc1.getHora()));
+        arregloCita[4] = String.valueOf(arc1.getFecha());
+        arregloCita[5] = String.valueOf(arc1.getHora());
     }
 }
