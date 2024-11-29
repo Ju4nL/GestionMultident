@@ -8,6 +8,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,7 +19,8 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
     private JPopupMenu suggestionPopup;
     private JList<String> suggestionList;
     private DefaultListModel<String> suggestionModel;
-
+    
+    DefaultTableModel modeloTabla = new DefaultTableModel();
     /**
      * Creates new form VistaHistorialClinicoPaciente
      */
@@ -27,6 +29,10 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
         
         
         
+    }
+    
+    public DefaultTableModel getModeloTabla(){
+        return modeloTabla;
     }
 
     /**
@@ -44,7 +50,7 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnAñadir = new javax.swing.JButton();
         label1 = new java.awt.Label();
         label2 = new java.awt.Label();
         label3 = new java.awt.Label();
@@ -53,7 +59,7 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
         label6 = new java.awt.Label();
         label7 = new java.awt.Label();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        textoNotas = new javax.swing.JTextArea();
         textoApellido = new java.awt.TextField();
         textoNombre = new java.awt.TextField();
         textoTelefono = new java.awt.TextField();
@@ -61,9 +67,9 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
         textoEmail = new java.awt.TextField();
         textoAlergias = new java.awt.TextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaHistorial = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -92,9 +98,9 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(204, 204, 204));
-        jButton5.setForeground(new java.awt.Color(51, 51, 51));
-        jButton5.setText("Añadir");
+        btnAñadir.setBackground(new java.awt.Color(204, 204, 204));
+        btnAñadir.setForeground(new java.awt.Color(51, 51, 51));
+        btnAñadir.setText("Añadir");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -104,7 +110,7 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
@@ -117,7 +123,7 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton3)
-                        .addComponent(jButton5)))
+                        .addComponent(btnAñadir)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -135,10 +141,10 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
 
         label7.setText("Alergias");
 
-        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        textoNotas.setBackground(new java.awt.Color(255, 255, 255));
+        textoNotas.setColumns(20);
+        textoNotas.setRows(5);
+        jScrollPane1.setViewportView(textoNotas);
 
         textoNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,8 +152,8 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setBackground(new java.awt.Color(204, 204, 204));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaHistorial.setBackground(new java.awt.Color(204, 204, 204));
+        tablaHistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -166,8 +172,8 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setGridColor(new java.awt.Color(204, 204, 204));
-        jScrollPane2.setViewportView(jTable1);
+        tablaHistorial.setGridColor(new java.awt.Color(204, 204, 204));
+        jScrollPane2.setViewportView(tablaHistorial);
 
         btnBuscar.setBackground(new java.awt.Color(204, 204, 204));
         btnBuscar.setForeground(new java.awt.Color(51, 51, 51));
@@ -178,9 +184,9 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(204, 204, 204));
-        jButton4.setForeground(new java.awt.Color(51, 51, 51));
-        jButton4.setText("Guardar");
+        btnModificar.setBackground(new java.awt.Color(204, 204, 204));
+        btnModificar.setForeground(new java.awt.Color(51, 51, 51));
+        btnModificar.setText("Modificar");
 
         jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -236,7 +242,7 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -288,7 +294,7 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
-                        .addComponent(jButton4))))
+                        .addComponent(btnModificar))))
         );
 
         label1.getAccessibleContext().setAccessibleName("");
@@ -323,11 +329,11 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnAñadir;
     public javax.swing.JButton btnBuscar;
+    public javax.swing.JButton btnModificar;
     public javax.swing.JButton jButton1;
     public javax.swing.JButton jButton3;
-    public javax.swing.JButton jButton4;
-    public javax.swing.JButton jButton5;
     public javax.swing.JComboBox<String> jComboBox1;
     public javax.swing.JLabel jLabel1;
     public javax.swing.JPanel jPanel1;
@@ -335,8 +341,6 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
     public java.awt.Label label1;
     public java.awt.Label label2;
     public java.awt.Label label3;
@@ -344,11 +348,13 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
     public java.awt.Label label5;
     public java.awt.Label label6;
     public java.awt.Label label7;
+    public javax.swing.JTable tablaHistorial;
     public java.awt.TextField textoAlergias;
     public java.awt.TextField textoAntecedentes;
     public java.awt.TextField textoApellido;
     public java.awt.TextField textoEmail;
     public java.awt.TextField textoNombre;
+    public javax.swing.JTextArea textoNotas;
     public java.awt.TextField textoTelefono;
     // End of variables declaration//GEN-END:variables
 }

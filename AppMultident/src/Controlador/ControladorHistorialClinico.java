@@ -5,9 +5,11 @@
 package Controlador;
 
 import Arboles.ArbolPaciente.ArbolPaciente;
+import Modelo.HistorialClinico;
 import Modelo.Paciente;
 import Persistencia.DatosHistorialClinico;
 import Persistencia.DatosPacientes;
+import Vista.VistaAñadirHistorial;
 import Vista.VistaHistorialClinicoPaciente;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -18,8 +20,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import static javax.swing.WindowConstants.HIDE_ON_CLOSE;
 
 /**
  *
@@ -35,8 +41,8 @@ public class ControladorHistorialClinico implements ActionListener {
         this.vista_historial.jButton1.addActionListener(this);
         this.vista_historial.btnBuscar.addActionListener(this);
         this.vista_historial.jButton3.addActionListener(this);
-        this.vista_historial.jButton4.addActionListener(this);
-        this.vista_historial.jButton5.addActionListener(this);
+        this.vista_historial.btnModificar.addActionListener(this);
+        this.vista_historial.btnAñadir.addActionListener(this);
 
         this.vista_historial.textoNombre.setEnabled(false);
         this.vista_historial.textoApellido.setEnabled(false);
@@ -44,7 +50,8 @@ public class ControladorHistorialClinico implements ActionListener {
         this.vista_historial.textoEmail.setEnabled(false);
         this.vista_historial.textoAntecedentes.setEnabled(false);
         this.vista_historial.textoAlergias.setEnabled(false);
-        
+        this.vista_historial.textoNotas.setEnabled(false);
+
         this.arbolPacientes = DatosPacientes.recuperarDeArchivo();
         this.vista_historial.jComboBox1.setEditable(true);
         this.vista_historial.jComboBox1.addActionListener(this);
@@ -64,8 +71,6 @@ public class ControladorHistorialClinico implements ActionListener {
         //this.vista_historial.jComboBox1.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {});
     }
 
-    
-
     public static List<String> leerArchivo(String archivo) {
         List<String> lista = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
@@ -80,45 +85,105 @@ public class ControladorHistorialClinico implements ActionListener {
     }
 
     public void iniciar() {
-        this.vista_historial.setTitle("Gestión de citas");
+        this.vista_historial.setTitle("Gestión de Historial");
         this.vista_historial.setSize(1100, 700);
         this.vista_historial.setLocationRelativeTo(null);
+        this.vista_historial.setDefaultCloseOperation(HIDE_ON_CLOSE);
 
+    }
+    public JTable getTabla(){
+        return this.vista_historial.tablaHistorial;
+    }
+
+    private void limpiarCampos() {
+        this.vista_historial.textoNombre.setText("");
+        this.vista_historial.textoApellido.setText("");
+        this.vista_historial.textoTelefono.setText("");
+        this.vista_historial.textoEmail.setText("");
+        this.vista_historial.textoAntecedentes.setText("");
+        this.vista_historial.textoAlergias.setText("");
+        this.vista_historial.textoNotas.setText("");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.vista_historial.btnBuscar) {
-            int idPaciente = Integer.parseInt(this.vista_historial.jComboBox1.getEditor().getItem().toString());
 
+        if (e.getSource() == this.vista_historial.btnBuscar) {
+            limpiarCampos();
+            int idPaciente = Integer.parseInt(this.vista_historial.jComboBox1.getEditor().getItem().toString());
+            
             buscarPaciente(idPaciente);
 
             this.vista_historial.jComboBox1.setForeground(Color.BLACK);
-            
+
         } else if (e.getSource() == this.vista_historial.jComboBox1) {
             if (this.vista_historial.jComboBox1.isPopupVisible()) {
                 this.vista_historial.jComboBox1.hidePopup();
                 this.vista_historial.jComboBox1.getParent().revalidate();
                 this.vista_historial.jComboBox1.getParent().repaint();
             }
-            this.vista_historial.jComboBox1.requestFocus();
+
+        } else if (e.getSource() == this.vista_historial.btnModificar) {
+            VistaAñadirHistorial vah = new VistaAñadirHistorial();
+            ControladorAñadirHistorial cah = new ControladorAñadirHistorial(vah, vista_historial);
+            cah.iniciar();
+            /*
+            try {
+                // Obtener el ID del paciente desde el comboBox
+                int idPaciente = Integer.parseInt(this.vista_historial.jComboBox1.getEditor().getItem().toString());
+                HistorialClinico hc = new HistorialClinico();
+                hc.setPaciente(arbolPacientes.buscar(idPaciente));
+
+                if (hc.getPaciente() != null) {
+                    // Configurar los datos del historial clínico
+                    hc.setAntecedentes(this.vista_historial.textoAntecedentes.getText());
+                    hc.setAlergias(this.vista_historial.textoAlergias.getText());
+                    hc.setNotasAdicionales(this.vista_historial.textoNotas.getText());
+                    
+                    DatosHistorialClinico dhc = new DatosHistorialClinico();
+                    dhc.guardarHistorialEnArchivo(hc);
+                    
+
+                    // Mostrar mensaje de éxito
+                    JOptionPane.showMessageDialog(this.vista_historial, "Historial clínico guardado exitosamente.");
+                } else {
+                    
+                    
+                    JOptionPane.showMessageDialog(this.vista_historial, "Paciente no encontrado. Verifique el ID.");
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this.vista_historial, "El ID del paciente debe ser un número válido.");
+            }*/
+        } else if (e.getSource() == this.vista_historial.btnAñadir) {
+
         }
     }
 
     private void buscarPaciente(int id) {
+        HistorialClinico hc = new HistorialClinico();
+        hc.setPaciente(arbolPacientes.buscar(id));
 
-        Paciente paciente = arbolPacientes.buscar(id);
+        if (hc.getPaciente() != null) {
 
-        if (paciente != null) {
-
-            this.vista_historial.textoNombre.setText(paciente.getNombre());
-            this.vista_historial.textoApellido.setText(paciente.getApellido());
-            this.vista_historial.textoTelefono.setText(paciente.getTelefono());
-            this.vista_historial.textoEmail.setText(paciente.getEmail());
-            this.vista_historial.textoNombre.setText(paciente.getNombre());
+            this.vista_historial.textoNombre.setText(hc.getPaciente().getNombre());
+            this.vista_historial.textoApellido.setText(hc.getPaciente().getApellido());
+            this.vista_historial.textoTelefono.setText(hc.getPaciente().getTelefono());
+            this.vista_historial.textoEmail.setText(hc.getPaciente().getEmail());
+            if (this.vista_historial.textoAntecedentes.getText().equals("") & this.vista_historial.textoAlergias.getText().equals("") & this.vista_historial.textoNotas.getText().equals("")) {
+                agregarDatosExtras(id);
+            }
 
         } else {
             JOptionPane.showMessageDialog(this.vista_historial, "Paciente no encontrado.");
         }
+    }
+
+    private void agregarDatosExtras(int id) {
+        DatosHistorialClinico dhc = new DatosHistorialClinico();
+        String[] datos = dhc.buscarPorIdEnArchivo(id);
+
+        this.vista_historial.textoAntecedentes.setText(datos[1]);
+        this.vista_historial.textoAlergias.setText(datos[2]);
+        this.vista_historial.textoNotas.setText(datos[3]);
     }
 }

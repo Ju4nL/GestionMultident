@@ -5,6 +5,7 @@
 package Modelo;
 
 import java.awt.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,30 +13,34 @@ import java.awt.List;
  */
 public class HistorialClinico {
     int idHistorial;
-    int idPaciente;
-    String nombrePaciente;
-    String apellidoPaciente;
-    String telefonoPaciente;
-    String emailPaciente;
-    String direccionPaciente;
     Paciente paciente;
     String antecedentes;
     String alergias;
     List tratamientos;
     String notasAdicionales;
 
-    public HistorialClinico(String idPaciente, String nombrePaciente, String apellidoPaciente, String telefonoPaciente, String emailPaciente, String antecedentes, String alergias, String notasAdicionales) {
-        this.idPaciente = Integer.parseInt(idPaciente);
-        this.nombrePaciente = nombrePaciente;
-        this.apellidoPaciente = apellidoPaciente;
-        this.telefonoPaciente = telefonoPaciente;
-        this.emailPaciente = emailPaciente;
+    public HistorialClinico(){}
+    
+    public HistorialClinico(int idHistorial, Paciente paciente, String antecedentes, String alergias, List tratamientos, String notasAdicionales) {
+        this.idHistorial = idHistorial;
+        this.paciente = paciente;
         this.antecedentes = antecedentes;
         this.alergias = alergias;
+        this.tratamientos = tratamientos;
         this.notasAdicionales = notasAdicionales;
     }
     
-    
+    public Object[] convertirAArreglo(int idHistorial, Paciente paciente, String antecedentes, 
+                                  String alergias, List tratamientos, String notasAdicionales) {
+    return new Object[] {
+        idHistorial,                            // ID del historial
+        paciente != null ? paciente.getNombre() : "Sin asignar", // Nombre del paciente (o nulo)
+        antecedentes != null ? antecedentes : "",  // Antecedentes
+        alergias != null ? alergias : "",          // Alergias
+        tratamientos != null ? tratamientos : new ArrayList<>(), // Lista de tratamientos
+        notasAdicionales != null ? notasAdicionales : "" // Notas adicionales
+    };
+}
 
     public int getIdHistorial() {
         return idHistorial;
@@ -45,15 +50,13 @@ public class HistorialClinico {
         this.idHistorial = idHistorial;
     }
 
-    public int getIdPaciente() {
-        return idPaciente;
+    public Paciente getPaciente() {
+        return paciente;
     }
 
-    public void setIdPaciente(int idPaciente) {
-        this.idPaciente = idPaciente;
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
-    
-    
 
     public String getAntecedentes() {
         return antecedentes;
@@ -71,6 +74,14 @@ public class HistorialClinico {
         this.alergias = alergias;
     }
 
+    public List getTratamientos() {
+        return tratamientos;
+    }
+
+    public void setTratamientos(List tratamientos) {
+        this.tratamientos = tratamientos;
+    }
+
     public String getNotasAdicionales() {
         return notasAdicionales;
     }
@@ -78,6 +89,11 @@ public class HistorialClinico {
     public void setNotasAdicionales(String notasAdicionales) {
         this.notasAdicionales = notasAdicionales;
     }
+
+    
+    
+    
+
     
     
 }
