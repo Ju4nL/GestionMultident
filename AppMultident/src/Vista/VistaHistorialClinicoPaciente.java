@@ -161,7 +161,7 @@ public class VistaHistorialClinicoPaciente extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Código Tratamiento", "Nombre", "Descripción", "Costo", "Fecha"
+                "Código Tratamiento", "Nombre Doctor", "Descripción", "Costo", "Fecha"
             }
         ) {
             boolean[] canEdit = new boolean [] {
