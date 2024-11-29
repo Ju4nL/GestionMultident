@@ -29,11 +29,12 @@ public class AppMultident {
         
         c1.iniciar();
         vg1.setVisible(true);
-        */
+      */
         VistaHistorialClinicoPaciente vhc1 = new VistaHistorialClinicoPaciente();
         ControladorHistorialClinico chc1= new ControladorHistorialClinico(vhc1);
         chc1.iniciar();
         vhc1.setVisible(true);
+
     }
     
 }

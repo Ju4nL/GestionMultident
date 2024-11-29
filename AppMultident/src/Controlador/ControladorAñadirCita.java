@@ -4,6 +4,7 @@
  */
 package Controlador;
 
+import Colas.ColaGestionCitas;
 import Modelo.Cita;
 import Vista.VistaAñadirCita;
 import Controlador.ControladorCitas;
@@ -37,13 +38,14 @@ public class ControladorAñadirCita implements ActionListener {
 
     VistaAñadirCita vista_añadir;
     VistaGestionCitas vista_gestion;
-    AppMultident app;
+    ColaGestionCitas cola_citas;
     Cita cita;
 
-    public ControladorAñadirCita(VistaAñadirCita va, VistaGestionCitas vg, Cita ct) {
+    public ControladorAñadirCita(VistaAñadirCita va, VistaGestionCitas vg, Cita ct, ColaGestionCitas cgc) {
         this.vista_gestion = vg;
         this.vista_añadir = va;
         this.cita = ct;
+        this.cola_citas = cgc;
 
         vista_añadir.jButton1.addActionListener(this);
         vista_añadir.jButton2.addActionListener(this);
@@ -87,12 +89,20 @@ public class ControladorAñadirCita implements ActionListener {
         cita.setHora(LocalTime.parse(vista_añadir.textoHora.getText()));
 
         if (e.getSource() == vista_añadir.jButton2) {
-            ArregloCita arreglo_gestionCitas = new ArregloCita(cita);
+            
+            int idPaciente = this.cita.getPaciente().getIdPaciente();
+            int idOdontologo = this.cita.getOdontologo().getIdOdontologo();
+            String estado = this.cita.getEstado();
+            LocalDate fecha = this.cita.getFecha();
+            LocalTime hora = this.cita.getHora();
+            
+            this.cola_citas.agregarCita(idrandom, idPaciente, idOdontologo, estado, fecha, hora);
 
-            System.out.println("Agregando fila: " + Arrays.toString(arreglo_gestionCitas.arregloCita)); // Depuración
+            
 
-            vista_gestion.getModeloTabla().addRow(arreglo_gestionCitas.arregloCita);
-            guardarCitaEnArchivo(arreglo_gestionCitas);
+            this.cola_citas.agregarUltimaCitaATabla(this.vista_gestion.getTablaCitas());
+            String ruta = "C:\\Users\\USER\\Documents\\GitHub\\GestionMultident\\AppMultident\\src\\Contenedores\\CitasTablas.txt";
+            this.cola_citas.guardarUltimaCitaEnArchivo(ruta);
 
             JOptionPane.showMessageDialog(vista_gestion, "Fila Agregada");
             vista_añadir.setVisible(false);
