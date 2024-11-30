@@ -4,20 +4,24 @@ package Vista;
  *
  * @author JUNIOR
  */
+import Controlador.ControladorRegistroInventario;
+import Modelo.RegistroInventario;
+import Modelo.MovimientoInventario;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 public class VistaRegistroInventario extends JFrame {
-    private JTextField txtProducto;
-    private JTextField txtCantidad;
-    private JTextField txtTipoMovimiento;
-    private JTextArea areaMovimientos; // Declaración de areaMovimientos
-
-    public VistaRegistroInventario() {
-        initComponents(); // Inicializa los componentes
+    
+    private ControladorRegistroInventario controlador;
+    
+public void setControlador(ControladorRegistroInventario controlador) {
+    this.controlador = controlador;
+}
+    public VistaRegistroInventario(ControladorRegistroInventario controlador) {
+        this.controlador = controlador; // Conectar el controlador
+        initComponents();
         setTitle("Registro de Inventario");
         setSize(800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -111,25 +115,50 @@ public class VistaRegistroInventario extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-       
+  
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+            // Obtener los datos de los campos
+        String producto = jTextField1.getText();
+        String cantidadStr = jTextField2.getText();
+        String tipoMovimiento = (String) jComboBox2.getSelectedItem();
+
+        // Validar la cantidad
+        if (!producto.isEmpty() && !cantidadStr.isEmpty()) {
+            try {
+                int cantidad = Integer.parseInt(cantidadStr);
+                controlador.agregarMovimiento(producto, cantidad, tipoMovimiento);
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jComboBox2.setSelectedIndex(0); // Reiniciar selección
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Cantidad debe ser un número entero.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos.");
+        }
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+    mostrarMovimientos(controlador.getMovimientos());
+    }
+
+    public void mostrarMovimientos(List<MovimientoInventario> movimientos) {
+        jTextArea1.setText(""); // Limpiar el área de texto
+        for (MovimientoInventario movimiento : movimientos) {
+            jTextArea1.append(movimiento.toString() + "\n");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new VistaRegistroInventario().setVisible(true);
-            }
-        });
+    
+        RegistroInventario registro = new RegistroInventario();
+        ControladorRegistroInventario controlador = new ControladorRegistroInventario(registro, new VistaRegistroInventario(controlador));
+        controlador.iniciar();
     }
 
 
