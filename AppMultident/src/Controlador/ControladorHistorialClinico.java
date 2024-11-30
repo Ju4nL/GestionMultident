@@ -8,6 +8,7 @@ import Arboles.ArbolPaciente.ArbolPaciente;
 import Colas.ColaGestionHistorial;
 import Modelo.HistorialClinico;
 import Modelo.Paciente;
+import Modelo.TablaHistorialClinico;
 import Persistencia.DatosHistorialClinico;
 import Persistencia.DatosPacientes;
 import Vista.VistaAñadirHistorial;
@@ -118,6 +119,9 @@ public class ControladorHistorialClinico implements ActionListener {
             
             TablaHistorialClinico thc = new TablaHistorialClinico();
             ColaGestionHistorial cgh = new ColaGestionHistorial();
+            
+            thc.setIdTratamiento(idPaciente);
+            
             cgh.agregarCita(idPaciente, paciente, odontologo, descripcion, idPaciente, LocalDate.EPOCH);
             
             
