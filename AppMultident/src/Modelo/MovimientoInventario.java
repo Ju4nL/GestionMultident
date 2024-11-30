@@ -35,5 +35,5 @@ public class MovimientoInventario {
                 ", tipoMovimiento='" + tipoMovimiento + '\'' +
                 '}';
     }
-}    
+}
 
