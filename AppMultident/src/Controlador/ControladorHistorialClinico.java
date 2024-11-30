@@ -5,6 +5,7 @@
 package Controlador;
 
 import Arboles.ArbolPaciente.ArbolPaciente;
+import Colas.ColaGestionHistorial;
 import Modelo.HistorialClinico;
 import Modelo.Paciente;
 import Persistencia.DatosHistorialClinico;
@@ -19,6 +20,7 @@ import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -113,8 +115,13 @@ public class ControladorHistorialClinico implements ActionListener {
             int idPaciente = Integer.parseInt(this.vista_historial.jComboBox1.getEditor().getItem().toString());
             
             buscarPaciente(idPaciente);
-
-            this.vista_historial.jComboBox1.setForeground(Color.BLACK);
+            
+            TablaHistorialClinico thc = new TablaHistorialClinico();
+            ColaGestionHistorial cgh = new ColaGestionHistorial();
+            cgh.agregarCita(idPaciente, paciente, odontologo, descripcion, idPaciente, LocalDate.EPOCH);
+            
+            
+            
 
         } else if (e.getSource() == this.vista_historial.jComboBox1) {
             if (this.vista_historial.jComboBox1.isPopupVisible()) {
