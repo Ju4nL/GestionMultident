@@ -70,8 +70,8 @@ public class ControladorHistorialClinico implements ActionListener {
         for (String id : ids) {
             this.vista_historial.jComboBox1.addItem(id);
         }
-
-        //this.vista_historial.jComboBox1.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {});
+        
+        iniciar();
     }
 
     public static List<String> leerArchivo(String archivo) {
@@ -91,6 +91,7 @@ public class ControladorHistorialClinico implements ActionListener {
         this.vista_historial.setTitle("Gestión de Historial");
         this.vista_historial.setSize(1100, 700);
         this.vista_historial.setLocationRelativeTo(null);
+        this.vista_historial.setVisible(true);
         this.vista_historial.setDefaultCloseOperation(HIDE_ON_CLOSE);
 
     }
@@ -122,7 +123,7 @@ public class ControladorHistorialClinico implements ActionListener {
             
             thc.setIdTratamiento(idPaciente);
             
-            cgh.agregarCita(idPaciente, paciente, odontologo, descripcion, idPaciente, LocalDate.EPOCH);
+            //cgh.agregarCita(idPaciente, paciente, odontologo, descripcion, idPaciente, LocalDate.EPOCH);
             
             
             
@@ -138,36 +139,8 @@ public class ControladorHistorialClinico implements ActionListener {
             VistaAñadirHistorial vah = new VistaAñadirHistorial();
             ControladorAñadirHistorial cah = new ControladorAñadirHistorial(vah, vista_historial);
             cah.iniciar();
-            /*
-            try {
-                // Obtener el ID del paciente desde el comboBox
-                int idPaciente = Integer.parseInt(this.vista_historial.jComboBox1.getEditor().getItem().toString());
-                HistorialClinico hc = new HistorialClinico();
-                hc.setPaciente(arbolPacientes.buscar(idPaciente));
-
-                if (hc.getPaciente() != null) {
-                    // Configurar los datos del historial clínico
-                    hc.setAntecedentes(this.vista_historial.textoAntecedentes.getText());
-                    hc.setAlergias(this.vista_historial.textoAlergias.getText());
-                    hc.setNotasAdicionales(this.vista_historial.textoNotas.getText());
-                    
-                    DatosHistorialClinico dhc = new DatosHistorialClinico();
-                    dhc.guardarHistorialEnArchivo(hc);
-                    
-
-                    // Mostrar mensaje de éxito
-                    JOptionPane.showMessageDialog(this.vista_historial, "Historial clínico guardado exitosamente.");
-                } else {
-                    
-                    
-                    JOptionPane.showMessageDialog(this.vista_historial, "Paciente no encontrado. Verifique el ID.");
-                }
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this.vista_historial, "El ID del paciente debe ser un número válido.");
-            }*/
-        } else if (e.getSource() == this.vista_historial.btnAñadir) {
-
-        }
+            
+        } 
     }
 
     private void buscarPaciente(int id) {

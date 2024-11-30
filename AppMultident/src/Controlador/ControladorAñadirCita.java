@@ -28,6 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.HIDE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -49,18 +50,13 @@ public class ControladorAñadirCita implements ActionListener {
 
         vista_añadir.jButton1.addActionListener(this);
         vista_añadir.jButton2.addActionListener(this);
-        vista_añadir.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                // Solo cierra esta ventana en lugar de cerrar toda la aplicación
-                vista_añadir.dispose();
-            }
-        });
+        iniciar();
     }
 
     public void iniciar() {
         vista_añadir.setTitle("Añadir Cita");
         vista_añadir.setLocationRelativeTo(null);
+        this.vista_añadir.setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 
     public void guardarCitaEnArchivo(ArregloCita arregloCita) {

@@ -10,6 +10,7 @@ public class Tratamiento {
     private String nombreP;
     private String direccionP;
     private String nombre;
+    private String descripcion; 
     private double costo;
     private String observaciones;
     
@@ -61,6 +62,16 @@ public class Tratamiento {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
+    
 
     public double getCosto() {
         return costo;

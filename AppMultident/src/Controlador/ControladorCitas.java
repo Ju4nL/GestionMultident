@@ -16,6 +16,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import static javax.swing.WindowConstants.HIDE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,6 +32,7 @@ public class ControladorCitas implements ActionListener {
     public void iniciar() {
         vista_gestion.setTitle("Gestión de citas");
         vista_gestion.setLocationRelativeTo(null);
+        this.vista_gestion.setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
     
 
@@ -44,7 +46,8 @@ public class ControladorCitas implements ActionListener {
         vista_gestion.btnOpcionAtras.addActionListener(this);
         DatosTablaGestionCitas dtgc = new DatosTablaGestionCitas();
         dtgc.cargarCitasDesdeArchivo(vista_gestion.getModeloTabla());
-
+        iniciar();
+        vista_gestion.setVisible(true);
     }
 
     @Override
