@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import vista.Vista;
 
-public class controladorproducto {
+public class ControladorProducto {
     private final List<modeloProductos> productos;
 
-    public controladorproducto(Vista view, modeloProductos mod) {
+    public ControladorProducto(Vista view, modeloProductos mod) {
         this.productos = new ArrayList<>();
     }
 
@@ -17,7 +17,7 @@ public class controladorproducto {
         Vista view = new Vista(); // Asegúrate de que la clase Vista esté correctamente definida
         modeloProductos mod = new modeloProductos(); // Asegúrate de que la clase Modelo tenga un constructor sin parámetros
 
-        controladorProducto controlador = new controladorProducto(view, mod);
+        ControladorProducto controlador = new ControladorProducto(view, mod);
 
         // Crear productos
         modeloProductos producto1 = new modeloProductos("hilo dental", 15.00, "fibra de 3 metros", "HD001");
