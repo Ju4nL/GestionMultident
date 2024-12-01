@@ -1,20 +1,21 @@
 package controlador;
 
 import  Modelo.modeloProductos; // Asegúrate de que la clase Modelo esté en el paquete correcto
+import Vista.Frm_Producto;
 import java.util.ArrayList;
 import java.util.List;
-import vista.Vista;
+
 
 public class ControladorProducto {
     private final List<modeloProductos> productos;
 
-    public ControladorProducto(Vista view, modeloProductos mod) {
+    public ControladorProducto(Frm_Producto view, modeloProductos mod) {
         this.productos = new ArrayList<>();
     }
 
     public static void main(String[] args) {
         // Crear instancias de Vista y Modelo
-        Vista view = new Vista(); // Asegúrate de que la clase Vista esté correctamente definida
+        Frm_Producto view = new Frm_Producto(); // Asegúrate de que la clase Vista esté correctamente definida
         modeloProductos mod = new modeloProductos(); // Asegúrate de que la clase Modelo tenga un constructor sin parámetros
 
         ControladorProducto controlador = new ControladorProducto(view, mod);
@@ -90,3 +91,4 @@ public class ControladorProducto {
         // Implementar lógica de inicio si es necesario
     }
 }
+
