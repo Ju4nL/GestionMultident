@@ -4,6 +4,9 @@
  */
 package Vista;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author USER
@@ -53,9 +56,15 @@ public class VistaGestionPorducto extends javax.swing.JFrame {
         jbt_atras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/atras.png"))); // NOI18N
         jbt_atras.setText("Atrás");
         jbt_atras.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jbt_atras.addActionListener(new java.awt.event.ActionListener() {
+        jbt_atras.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbt_atrasActionPerformed(evt);
+            }
+
+
+            private void jbt_atrasActionPerformed(ActionEvent evt) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
         });
 
@@ -138,11 +147,9 @@ public class VistaGestionPorducto extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
-
-    private void jbt_atrasActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-    }                                         
+    }
+    // TODO add your handling code here:
+    // </editor-fold>                        
 
     /**
      * @param args the command line arguments
@@ -189,3 +196,4 @@ public class VistaGestionPorducto extends javax.swing.JFrame {
     private javax.swing.JTable jtb_datos;
     // End of variables declaration                   
 }
+
