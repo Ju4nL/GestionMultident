@@ -11,7 +11,16 @@ import javax.swing.JButton;
 public class vistaTratamiento extends javax.swing.JFrame {
     
     private ControladorTratamiento ctrlTratamiento = new ControladorTratamiento();
-
+    private void limpiarCampos() {
+    txtNombreDoc.setText("");
+    txtTelefonoDoc.setText("");
+    txtCorreoDoc.setText("");
+    txtNombreP.setText("");
+    txtDireccionP.setText("");
+    txtTelefonoP.setText("");
+    txtObservaciones.setText("");
+    txtTratamiento.setText("");
+}
     public vistaTratamiento() {
         initComponents();
     }
@@ -206,20 +215,33 @@ public class vistaTratamiento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-    String nombreDoc = txtNombreDoc.getText();
-    String telefonoDoc = txtTelefonoDoc.getText();
-    String correoDoc = txtCorreoDoc.getText();
-    String nombreP = txtNombreP.getText();
-    String direccionP = txtDireccionP.getText();
-    String telefonoP = txtTelefonoP.getText();
-    String observaciones = txtObservaciones.getText();
-    String tratamiento = txtTratamiento.getText();
-    
-    // Llamar al controlador para agregar el tratamiento (suponiendo que tienes un método en el controlador)
+// Obtener los datos de los campos de texto
+    String nombreDoc = txtNombreDoc.getText().trim();
+    String telefonoDoc = txtTelefonoDoc.getText().trim();
+    String correoDoc = txtCorreoDoc.getText().trim();
+    String nombreP = txtNombreP.getText().trim();
+    String direccionP = txtDireccionP.getText().trim();
+    String telefonoP = txtTelefonoP.getText().trim();
+    String observaciones = txtObservaciones.getText().trim();
+    String tratamiento = txtTratamiento.getText().trim();
+
+    // Validar que no haya campos vacíos
+    if (nombreDoc.isEmpty() || telefonoDoc.isEmpty() || correoDoc.isEmpty() || 
+        nombreP.isEmpty() || direccionP.isEmpty() || telefonoP.isEmpty() || 
+        observaciones.isEmpty() || tratamiento.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor, llena todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Agregar el tratamiento al controlador
     ctrlTratamiento.agregarTratamiento(nombreDoc, telefonoDoc, correoDoc, nombreP, direccionP, telefonoP, observaciones, tratamiento);
     
-    // Mostrar un mensaje de confirmación (opcional)
-    JOptionPane.showMessageDialog(this, "Tratamiento agregado exitosamente");
+    // Guardar los datos en el archivo
+    ctrlTratamiento.guardarEnArchivo(nombreDoc, telefonoDoc, correoDoc, nombreP, direccionP, telefonoP, observaciones, tratamiento);
+
+    // Confirmación y limpieza
+    JOptionPane.showMessageDialog(this, "Tratamiento agregado y guardado exitosamente.");
+    limpiarCampos();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
