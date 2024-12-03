@@ -1,2 +1,1 @@
-2,Desconocido,Desconocido,Desconocido,Sin información
-1,Asma,Gatos,No puede estar en ambientes fríos
+3,Desconocido,Desconocido,Desconocido,Sin información

@@ -43,9 +43,9 @@ public class ControladorHistorialClinico implements ActionListener {
         this.vista_historial = vhcp;
         this.vista_historial.jButton1.addActionListener(this);
         this.vista_historial.btnBuscar.addActionListener(this);
-        this.vista_historial.jButton3.addActionListener(this);
+        
         this.vista_historial.btnModificar.addActionListener(this);
-        this.vista_historial.btnAñadir.addActionListener(this);
+        
 
         this.vista_historial.textoNombre.setEnabled(false);
         this.vista_historial.textoApellido.setEnabled(false);
@@ -89,15 +89,13 @@ public class ControladorHistorialClinico implements ActionListener {
 
     public void iniciar() {
         this.vista_historial.setTitle("Gestión de Historial");
-        this.vista_historial.setSize(1100, 700);
+        this.vista_historial.setSize(450, 700);
         this.vista_historial.setLocationRelativeTo(null);
         this.vista_historial.setVisible(true);
         this.vista_historial.setDefaultCloseOperation(HIDE_ON_CLOSE);
 
     }
-    public JTable getTabla(){
-        return this.vista_historial.tablaHistorial;
-    }
+    
 
     private void limpiarCampos() {
         this.vista_historial.textoNombre.setText("");
@@ -123,7 +121,8 @@ public class ControladorHistorialClinico implements ActionListener {
             
             thc.setIdTratamiento(idPaciente);
             
-            //cgh.agregarCita(idPaciente, paciente, odontologo, descripcion, idPaciente, LocalDate.EPOCH);
+            
+            
             
             
             
