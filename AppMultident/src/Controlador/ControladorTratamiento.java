@@ -7,6 +7,9 @@ import Modelo.Tratamiento;
 import java.util.ArrayList;
 import java.util.List;
 import Vista.vistaTratamiento;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ControladorTratamiento {
     
@@ -37,7 +40,22 @@ public class ControladorTratamiento {
         System.out.println("Observaciones: " + observaciones);
         System.out.println("Tratamiento: " + tratamiento);
     }
-
+        public void guardarEnArchivo(String nombreDoc, String telefonoDoc, String correoDoc, String nombreP, String direccionP, String telefonoP, String observaciones, String tratamiento) {
+    String rutaArchivo = "C:\\Users\\JUNIOR\\Documents\\GestionMultident\\AppMultident\\src\\Contenedores\\Tratamiento"; // Nombre del archivo
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo, true))) {
+        writer.write("Doctor: " + nombreDoc + "\n");
+        writer.write("Teléfono Doctor: " + telefonoDoc + "\n");
+        writer.write("Correo Doctor: " + correoDoc + "\n");
+        writer.write("Paciente: " + nombreP + "\n");
+        writer.write("Dirección Paciente: " + direccionP + "\n");
+        writer.write("Teléfono Paciente: " + telefonoP + "\n");
+        writer.write("Observaciones: " + observaciones + "\n");
+        writer.write("Tratamiento: " + tratamiento + "\n");
+        writer.write("----------------------------------------\n");
+    } catch (IOException e) {
+        System.err.println("Error al guardar los datos en el archivo: " + e.getMessage());
+    }    
+    }   
     // Método para eliminar un tratamiento por nombre
     public void eliminarTratamiento(String nombre) {
         listaTratamientos.removeIf(t -> t.getNombre().equalsIgnoreCase(nombre));
@@ -47,4 +65,5 @@ public class ControladorTratamiento {
     public List<Tratamiento> obtenerTratamientos() {
         return listaTratamientos;
     }
+
 }

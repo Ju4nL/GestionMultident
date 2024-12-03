@@ -1,0 +1,18 @@
+Doctor: MANUEL SANCHEZ RUIZ
+Teléfono Doctor: 964783465
+Correo Doctor: MANUEL@GMAIL.COM
+Paciente: CARLOS HERRERA TUME
+Dirección Paciente: LOS OLIVOS 16233
+Teléfono Paciente: 954673821
+Observaciones: EL PACIENTE PRESENTA LESIONES EN LAS ANSIAS
+Tratamiento: PARACETAMOL CADA 8 HORAS
+----------------------------------------
+Doctor: Manuel Sanchez
+Teléfono Doctor: 983728377
+Correo Doctor: Sanchez@gmail.com
+Paciente: Juan Terronez
+Dirección Paciente: independencia 12345
+Teléfono Paciente: 908764512
+Observaciones: El paciente muestra lesiones en las ansias
+Tratamiento: Paracetamol cada 8 horas
+----------------------------------------
