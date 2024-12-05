@@ -269,7 +269,8 @@ public class ControladorOdontologos implements ActionListener {
                 odontologo.getNumeroColegiatura()
             });
         } else {
-            vistaGestionOdontologos.displayErrorMessage("No se encontró el odontólogo.");
+            vistaGestionOdontologos.displayErrorMessage("No se encontró el odontólogo.");   
+            }
         }
     }
 
