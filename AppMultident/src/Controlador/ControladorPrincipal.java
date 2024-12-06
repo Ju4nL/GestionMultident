@@ -5,9 +5,11 @@
 package Controlador;
 
 
+import Vista.VistaGestionCitas;
 import Vista.VistaHome; 
 import Vista.VistaGestionOdontologo;
 import Vista.VistaGestionPacientes; 
+import Vista.VistaHistorialClinicoPaciente;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -69,14 +71,14 @@ public class ControladorPrincipal implements ActionListener {
     }
 
     private void abrirVistaCitas() {
-        //VistaCitas vistaCitas = new VistaCitas();
-        //new ControladorCitas(vistaCitas);
-        //vistaCitas.setVisible(true);
+        VistaGestionCitas vistaCitas = new VistaGestionCitas();
+        ControladorCitas controladorCitas = new ControladorCitas(vistaCitas);
+        
     }
 
     private void abrirVistaInventario() {
-        //VistaInventario vistaInventario = new VistaInventario();
-        //new ControladorInventario(vistaInventario);
-        //vistaInventario.setVisible(true);
+        VistaHistorialClinicoPaciente vistaHistorial = new VistaHistorialClinicoPaciente();
+        ControladorHistorialClinico controladorHistorial = new ControladorHistorialClinico(vistaHistorial);
+        
     }
 }

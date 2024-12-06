@@ -73,6 +73,9 @@ public class ControladorCitas implements ActionListener {
                 modelo.removeRow(filaSeleccionada);
             }
         }
+        if (e.getSource() == vista_gestion.btnOpcionAtras){
+            this.vista_gestion.setVisible(false);
+        }
     }
 
 }

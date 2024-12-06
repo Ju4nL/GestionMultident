@@ -41,7 +41,7 @@ public class ControladorHistorialClinico implements ActionListener {
 
     public ControladorHistorialClinico(VistaHistorialClinicoPaciente vhcp) {
         this.vista_historial = vhcp;
-        this.vista_historial.jButton1.addActionListener(this);
+        this.vista_historial.btnOpcionAtras.addActionListener(this);
         this.vista_historial.btnBuscar.addActionListener(this);
         
         this.vista_historial.btnModificar.addActionListener(this);
@@ -139,7 +139,9 @@ public class ControladorHistorialClinico implements ActionListener {
             ControladorAñadirHistorial cah = new ControladorAñadirHistorial(vah, vista_historial);
             cah.iniciar();
             
-        } 
+        }else if (e.getSource() == this.vista_historial.btnOpcionAtras){
+            this.vista_historial.setVisible(false);
+        }
     }
 
     private void buscarPaciente(int id) {

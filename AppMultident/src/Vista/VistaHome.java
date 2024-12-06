@@ -141,9 +141,14 @@ public class VistaHome extends javax.swing.JFrame {
         btnInventario.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         btnInventario.setForeground(new java.awt.Color(51, 51, 51));
         btnInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/inventario.png"))); // NOI18N
-        btnInventario.setText("Inventario");
+        btnInventario.setText("Historial Clinico");
         btnInventario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnInventario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInventarioActionPerformed(evt);
+            }
+        });
 
         btnCitas.setBackground(new java.awt.Color(255, 255, 255));
         btnCitas.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
@@ -205,6 +210,10 @@ public class VistaHome extends javax.swing.JFrame {
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
         dispose();
     }//GEN-LAST:event_btnSalirMouseClicked
+
+    private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInventarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
