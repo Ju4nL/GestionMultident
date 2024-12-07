@@ -5,12 +5,13 @@
 package ListasSimples;
 
 import java.util.ArrayList;
-
+import 
 /**
  *
  * @author USER
  */
 public class ListaHistorialDatos {
+    
     private ArrayList<String> elementos;
 
     // Constructor
@@ -63,4 +64,4 @@ public class ListaHistorialDatos {
         }
     }
 }
-}
+

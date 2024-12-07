@@ -1,29 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Vista;
 
-import Modelo.Cita;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import Colas.ColaOdontologo;
+import Modelo.Odontologo;
 
-/**
- *
- * @author USER
- */
 public class VistaAñadirOdontologo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VistaAñadirCita
-     */
+    private ColaOdontologo Co; // Declaramos la cola para almacenar odontólogos
+    private void limpiarCampos() {
+    textoNombre.setText("");
+    textoEspecialidad.setText("");
+    textoTelefono.setText("");
+    textoEmail.setText("");
+    textoNumeroColegiatura.setText("");
+}
     public VistaAñadirOdontologo() {
         initComponents();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Co = new ColaOdontologo();
     }
 
     public JTextField getTextoEmail() {
@@ -235,11 +234,37 @@ public class VistaAñadirOdontologo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+     textoNombre.setText("");
+        textoEspecialidad.setText("");
+        textoTelefono.setText("");
+        textoEmail.setText("");
+        textoNumeroColegiatura.setText("");
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+String nombre = textoNombre.getText().trim();
+    String especialidad = textoEspecialidad.getText().trim();
+    String telefono = textoTelefono.getText().trim();
+    String email = textoEmail.getText().trim();
+    String numeroColegiatura = textoNumeroColegiatura.getText().trim();
 
+    if (nombre.isEmpty() || especialidad.isEmpty() || telefono.isEmpty() || email.isEmpty() || numeroColegiatura.isEmpty()) {
+        displayErrorMessage("Por favor, complete todos los campos.");
+        return;
+    }
+
+    try {
+        // Crear una instancia de Odontologo con los datos de los campos de texto
+        Odontologo Od = new Odontologo(7282, nombre, especialidad, telefono, email, numeroColegiatura);
+
+        // Agregar el odontólogo a la cola
+        Co.encolar(Od);  // Aquí debería funcionar si 'Co' es una instancia de ColaOdontologo
+
+        displaySucessMessage("Odontólogo añadido correctamente a la cola.");
+        limpiarCampos();
+    } catch (Exception e) {
+        displayErrorMessage("Error al añadir el odontólogo: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void textoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoNombreActionPerformed
@@ -258,11 +283,6 @@ public class VistaAñadirOdontologo extends javax.swing.JFrame {
     }
 
 public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -279,15 +299,8 @@ public static void main(String args[]) {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(VistaAñadirCita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
-        try {
-        UIManager.setLookAndFeel( new FlatLightLaf() );
-        } catch( Exception ex ) {
-        System.err.println( "Failed to initialize LaF" );
-}
             public void run() {
                 new VistaAñadirOdontologo().setVisible(true);
                 

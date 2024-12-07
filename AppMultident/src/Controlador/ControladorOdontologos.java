@@ -1,12 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controlador;
 
 import Busquedas.BusquedaOdontologos;
 import ListasEnlazadas.ListasEnlazadasOdontologo.ListaEnlazadaOdontologos;
-import ListasEnlazadas.ListasEnlazadasOdontologo.NodoOdontologo;
+import ListasEnlazadas.ListasEnlazadasOdontologo.NodoOdontologo;  
 import Modelo.Odontologo;
 import Ordenamientos.OrdenamientoOdontologos;
 import Persistencia.DatosOdontologos;
@@ -17,10 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author LOZADA
- */
+
 public class ControladorOdontologos implements ActionListener {
 
     private ListaEnlazadaOdontologos listaOdontologos;
@@ -272,7 +265,6 @@ public class ControladorOdontologos implements ActionListener {
             vistaGestionOdontologos.displayErrorMessage("No se encontró el odontólogo.");   
             }
         }
-    }
 
     private void mostrarResultadoBusqueda(List<Odontologo> odontologos) {
         if (odontologos != null && !odontologos.isEmpty()) {
