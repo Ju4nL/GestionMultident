@@ -9,9 +9,6 @@ package Modelo;
  * @author USER
  */
 public class Paciente {
-    
-    
-    
     private int idPaciente;
     private String nombre;
     private String apellido;

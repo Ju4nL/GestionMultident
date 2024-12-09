@@ -127,3 +127,5 @@ public class ArbolPaciente {
         return actual.getDato().getIdPaciente(); // Retornar el ID del nodo más grande
     }
 }
+
+
